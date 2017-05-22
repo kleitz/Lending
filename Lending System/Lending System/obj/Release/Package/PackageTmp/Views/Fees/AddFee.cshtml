@@ -1,0 +1,86 @@
+﻿@model Lending_System.Models.tbl_fees_validation
+
+@{
+    ViewBag.Title = "Add Fee";
+    Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
+}
+
+<div class="container">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:#ffffff"><strong>Add Fee</strong></h3>
+            <div class="btn-danger pull-right" style="margin-top:-18px">
+                @Html.ActionLink("Back", "Index", "Fees", null, new { @class = "btn btn-xs ", @style = "font-family: Open Sans; color:#fff", @id = "back" })
+            </div>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" id="myForm">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.fees_description, new { @required = "", @class = "form-control", @placeholder = "Description" })
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <button type="button" class="btn btn-lg btn-success" onclick="AddFee()">Save</button>
+                        <button type="button" class="btn btn-lg btn-danger" onclick="Cancel()">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/validation")
+
+<script type="text/javascript">
+    debugger
+    $(function () {
+        $('#dateregistered').datetimepicker({
+            defaultDate: "@ViewBag.datetime",
+            disabledDates: [
+                moment("@ViewBag.datetime"),
+            ]
+        });
+    });
+    @*$(function () {
+        $('#dateofbirth').datetimepicker({
+            defaultDate: "@ViewBag.datetime"
+        });
+    });*@
+    var AddFee = function () {
+
+        var data = $("#myForm").serialize();
+
+        //if (!$("#myForm").valid()) {
+        //    console.log(data)
+        //    return false;
+        //}
+
+        $.ajax({
+            type: "Post",
+            url: "@Url.Action("AddFee", "Fees")",
+            data: data,
+        success: function (response) {
+            if (response != "Success") {
+                alert("Failed!");
+                window.location.href = "@Url.Action("AddFee", "Fees")"
+            }
+            else {
+                //alert("Success!");
+                window.location.href = "@Url.Action("Index", "Fees")"
+            }
+        }
+    })
+
+    }
+    var Cancel = function () {
+        window.location.href = "@Url.Action("Index", "Fees")"
+    }
+</script>
+

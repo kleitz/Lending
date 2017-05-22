@@ -1,0 +1,322 @@
+﻿@model Lending_System.Models.tbl_loan_type_validation
+
+@{
+    ViewBag.Title = "Add Loan";
+    Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
+}
+
+<div class="container">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:#ffffff"><strong>Loan Type</strong></h3>
+            <div class="btn-danger pull-right" style="margin-top:-22px">
+                @Html.ActionLink("Back", "Index", "Loans", null, new { @class = "btn btn-sm", @style = "color:#fff" })
+            </div>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" id="myForm">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.description, new { @required = "", @class = "form-control", @placeholder = "Short term loan" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Interest Rate</label>
+                        <div class="input-group col-md-6">
+                            @Html.TextBoxFor(m => m.interest, new { @type = "number", @required = "", @class = "form-control", @placeholder = "0.00" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            @Html.RadioButtonFor(m => m.interest_type, "1") Add-on to Loan
+                        </label>
+                        <label class="control-label">
+                            @Html.RadioButtonFor(m => m.interest_type, "2") Deduct from loan proceeds
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="table-responsive">
+                        <div class="col-sm-12">
+                            <table id="charges-table" class="table table-striped table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>autonum</th>
+                                        <th>Fees Description</th>
+                                        <th>Percentage</th>
+                                        <th>Amount</th>
+                                        <th>ActualAmount</th>
+                                        <th>Chargetype</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <a href="javascript:ShowAddCharges();" class="btn btn-sm btn-warning">Add Charges</a>
+                    </div>
+                </div>
+                <br>
+                <div class="container pull-left">
+                    <div class="form-group ">
+                        <button type="button" class="btn btn-lg btn-success" onclick="AddLoans()">Save</button>
+                        <button type="button" class="btn btn-lg btn-danger" onclick="Cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+</div>
+<div class="container" style="width:40%;margin-top:20%">
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Add Charges</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-horizontal" id="myForm">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <div class="input-group col-md-6">
+                                @Html.DropDownList("description", (SelectList)ViewBag.Charges, "-Select-", new { @class = "form-control", @id = "txtdescription", @name = "description" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <div class="input-group col-md-6">
+                                <input type="number" id="txtamount" class="form-control" placeholder="0.00" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">
+                                <input type="radio" name="txtcharge_type" id="txtcharge_type" value="1"/> Percentage
+                            </label>
+                            <label class="control-label">
+                                <input type="radio" name="txtcharge_type" id="txtcharge_type" value="2" /> Amount
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-success" onclick="javascript:RowAddEntry();">Add</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+</script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validation")
+
+@Scripts.Render("~/Scripts/Datas/custom-common.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/select2.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/toastr.min.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/responsive.bootstrap.min.js")
+
+<script type="text/javascript">
+
+    var Cancel = function () {
+        window.location.href = "@Url.Action("Index", "Loans")"
+    }
+</script>
+<script>
+    function ShowAddCharges() {
+        $('#myModal').modal('show');
+
+        setTimeout(function ()
+        {
+            $('#txtdescription').focus();
+        }, 300);
+
+        //destroy select2 object's 1st
+        $('#txtdescription').select2();
+        $('#txtdescription').select2('destroy');
+
+        //reset objects in add entry modal
+        if ($('#txtdescription').find('option:selected').text() != "") {
+            $("#txtdescription").val('-Select').trigger("change");
+        }
+    };
+
+    function RowAddEntry() {
+        var table = $('#charges-table').DataTable();
+        var line_no = table.rows().eq(0).length + 1;
+
+        var description = $('#txtdescription').val();
+        var amount = $('#txtamount').val();
+        var charge_type = $('#txtcharge_type').val();
+
+        if (description == "-Select-")
+        {
+            toastr.error('Please select charge')
+            $('#txtdescription').focus();
+        }
+        else
+        {
+            if (amount == "") {
+                toastr.error('Please enter amount.')
+                $('#txtamount').focus();
+            }
+            else {
+
+                if (charge_type == "") {
+                    toastr.error('Please select charge type.')
+                    $('#txtcharge_type').focus();
+                }
+                else if (charge_type == "1") {
+                    table.row.add({
+                        "description": description,
+                        "percentage": amount,
+                        "amount": "0.00",
+                        "actualamount": amount,
+                        "charge_type": charge_type,
+                    }).draw(true);
+                    $('#myModal').modal("hide");
+                }
+                else if (charge_type == "2") {
+                    table.row.add({
+                        "description": description,
+                        "percentage": "0.00",
+                        "amount": amount,
+                        "actualamount": amount,
+                        "charge_type": charge_type,
+                    }).draw(true);
+                    $('#myModal').modal("hide");
+                }
+            }
+        }
+    };
+</script>
+<script>
+    $(document).ready(function () {
+        
+        listcharges.InitializeEvents();
+    });
+
+    var listcharges =
+    {
+        InitializeEvents: function () {
+            var table = $('#charges-table').DataTable({
+                "bPaginate": false,
+                "bLengthChange": false,
+                "bFilter": false,
+                "bInfo": false,
+                "ajax": {
+                    "url": RootUrl + "Loans/LoadList",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                        { "data": "autonum", "className": "hide" },
+                        { "data": "description", "autoWidth": true },
+                        { "data": "percentage", "className": "dt-center" },
+                        { "data": "amount", "className": "dt-center" },
+                        { "data": "actualamount", "className": "hide" },
+                        { "data": "charge_type", "className": "hide" },
+                        {
+                            "orderable": false, "className": "dt-left", "render": function (data, type, row) {
+                                return '<button class="btn btn-xs btn-danger fa fa-minus-square" id="btnDelete" style="margin-left:10px" Title="Remove charge"></button>'
+                            }
+                        }
+                ]
+            });
+            //delete selected accounting entry
+            $("#charges-table tbody").on('click', '#btnDelete', function () {
+                table
+                        .row($(this).parents('tr'))
+                        .remove()
+                        .draw();
+            });
+        }
+    }
+</script>
+<script id="partial-js-container" data-ajax-update="true">
+    @*var message = @Html.Raw(Json.Encode(((@Html.ValidationSummary() == null) ? "" : @Html.ValidationSummary().ToHtmlString())));*@
+    var message = "";
+    function AddLoans()
+    {
+        var data = $("#myForm").serialize();
+
+         $.ajax({
+                type: "Post",
+                url: "@Url.Action("AddLoans", "Loans")",
+                data: data,
+            success: function (response, status, xhr) {
+                successMessage(response.Status);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                if (errorThrown == "Forbidden") {
+                    toastr.error("Forbidden access");
+                    return false;
+                } else {
+                    toastr.error('An error occurred please retry.');
+                    return false;
+                }
+            }
+        })
+        if (message.length > 0)
+        {
+            toastr.error(message);
+            return false;
+        }
+        else
+        {
+            var totalRowCount = $("#charges-table tr").length;
+            var rowText;
+
+            for (var i = 1; i < totalRowCount; i++) {
+                rowText = document.getElementById("charges-table").rows[i].cells[0].innerText;
+
+                if (rowText == "No data available in table")
+                {
+                    return false;
+                }
+                else
+                {
+                    var myObj = {
+                        "description" : document.getElementById("charges-table").rows[i].cells[1].innerText,
+                        "amount" : document.getElementById("charges-table").rows[i].cells[3].innerText,
+                        "charge_type" : document.getElementById("charges-table").rows[i].cells[4].innerText
+                    };
+                    $.ajax({
+                        url: RootUrl + "/Loans/AddLoanCharges",
+                        type: "POST",
+                        data: JSON.stringify(myObj),
+                        contentType: 'application/json',
+                        success: function (response, status, xhr) {
+                            successMessage(response.Status);
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            if (errorThrown == "Forbidden") {
+                                toastr.error("Forbidden access");
+                                return false;
+                            } else {
+                                toastr.error('An error occurred please retry.');
+                                return false;
+                            }
+                        }
+                    });
+                }
+            }
+            toastr.success('Record was successfully save.', 'Save');
+            window.location.href = "@Url.Action("Index", "Loans")"
+        }
+    }
+</script>

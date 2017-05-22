@@ -1,0 +1,1 @@
+﻿var RootUrl = '@Url.Content("~/")';

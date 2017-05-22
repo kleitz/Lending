@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
+}
+
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:#ffffff"><strong>List of Processed Loans</strong></h3>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <div class="col-sm-12">
+                    <table id="LoanProcessing-table" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>autonum</th>
+                                <th>Loan No.</th>
+                                <th>Name of Borrower</th>
+                                <th>Type of Loan</th>
+                                <th>Loan Amount</th>
+                                <th>Date of Loan</th>
+                                <th>Status of Loan</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <input type="button" value="Create" class="btn btn-info pull-right" style="margin-right:20px" onclick="Create()" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validation")
+@Scripts.Render("~/bundles/A-Custom/Tables")
+@Scripts.Render("~/Scripts/Datas/custom-common.js")
+@Scripts.Render("~/Scripts/Datas/LoanProcessing.js")
+
+<script type="text/javascript">
+    var Create = function () {
+        window.location.href = "@Url.Action("Create", "LoanProcessing")"
+    }
+</script>
+
+

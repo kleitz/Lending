@@ -1,0 +1,271 @@
+﻿@model Lending_System.Models.tbl_loan_processing
+
+@{
+    ViewBag.Title = "Approval";
+    Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validation")
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+
+@Scripts.Render("~/Scripts/Datas/custom-common.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/select2.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/toastr.min.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/responsive.bootstrap.min.js")
+@Scripts.Render("~/Scripts/bootstrap-select.min.js")
+@Scripts.Render("~/Scripts/jquery.number.min.js")
+
+<div class="container">
+    @using (Html.BeginForm(new { @id = "myForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-horizontal">
+            <h4 id="StatusTitle">@Html.DisplayTextFor(model => model.status)</h4>
+            <hr />
+            <div role="tabpanel">
+                @Html.HiddenFor(model => model.autonum, new { @id = "txtautonum" })
+                @Html.HiddenFor(model => model.amortization_id, new { @id = "txtamortization_id" })
+                @Html.HiddenFor(model => model.finance_charge_id, new { @id = "txtfinance_charge_id" })
+                @Html.HiddenFor(model => model.status, new { @id = "txtstatus" })
+                @Html.HiddenFor(model => model.prepared_by_id, new { @id = "txtprepaired_by_id" })
+                @Html.HiddenFor(model => model.reviewed_by_id, new { @id = "txtreviewed_by_id" })
+                @Html.HiddenFor(model => model.approved_by_id, new { @id = "txtapproved_by_id" })
+                <!-- Nav tabs -->
+                <ul class="nav nav-pills danger" role="tablist">
+                    <li class="active">
+                        <a href="#step1" aria-controls="step1" role="tab" data-toggle="tab">
+                            Loan Details
+                        </a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content" style="padding-top: 20px">
+                    <div role="tabpanel" class="tab-pane active" id="step1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="margin-left: 15px">Date</label>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    @Html.EditorFor(model => model.loan_date, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @id = "txtloan_date" } })
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.loan_date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="margin-left: 15px">Loan No</label>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    @Html.EditorFor(model => model.loan_no, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @id = "txtloan_no" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.loan_no, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="margin-left: 15px">Borrower</label>
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model => model.customer_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @id = "txtcustomer_name" } })
+                                        @Html.HiddenFor(model => model.customer_id, new { @id = "txtcustomer_id" })
+                                        @Html.ValidationMessageFor(model => model.customer_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="margin-left: 15px">Type of Loan</label>
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model => model.loan_name, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @id = "txtloan_name" } })
+                                        @Html.HiddenFor(model => model.loantype_id, new { @id = "txtloantype_id" })
+                                        @Html.ValidationMessageFor(model => model.loan_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="margin-left: 15px">Loan Granted</label>
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.loan_granted, new { htmlAttributes = new { @class = "form-control number", @readonly = "true", @type = "text", @min = "0", @onkeyup = "", @style = "text-align:right", @id = "txtloan_granted" } })
+                                                @Html.ValidationMessageFor(model => model.loan_granted, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="margin-left: 15px">Interest Rate</label>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    @Html.EditorFor(model => model.loan_interest_rate, new { htmlAttributes = new { @class = "form-control number", @type = "text", @min = "0", @readonly = "true", @id = "txtloan_interest_rate", @value = @ViewBag.LoanTypeListInterestRate } })
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.loan_interest_rate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="margin-left: 15px">Payment Scheme</label>
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.payment_scheme, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @id = "txtloan_name" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.payment_scheme, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="margin-left: 15px">Due Date</label>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    @Html.EditorFor(model => model.due_date, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @id = "txtdue_date" } })
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.due_date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label style="margin-left: 15px">No. of Installment</label>
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.installment_no, new { htmlAttributes = new { @class = "form-control", @readonly = "true", @type = "number", @min = "0", @id = "txtinstallment_no" } })
+                                                @Html.ValidationMessageFor(model => model.installment_no, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="margin-left: 15px">Total Receivables</label>
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model => model.total_receivable, new { htmlAttributes = new { @class = "form-control number", @type = "text", @min = "0", @readonly = "true", @style = "text-align:right", @id = "txttotal_receivable" } })
+                                        @Html.ValidationMessageFor(model => model.total_receivable, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label style="margin-left: 15px">Net Proceeds</label>
+                                    <div class="col-md-12 ">
+                                        @Html.EditorFor(model => model.net_proceeds, new { htmlAttributes = new { @class = "form-control number", @type = "text", @min = "0", @readonly = "true", @style = "text-align:right", @id = "txtnet_proceeds" } })
+                                        @Html.ValidationMessageFor(model => model.net_proceeds, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title" style="color:#ffffff"><strong>Amortization Schedule</strong></h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <div class="col-sm-12">
+                                                    <table id="Amortization-table" class="table table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Due Date</th>
+                                                                <th>Principal</th>
+                                                                <th>Interest</th>
+                                                                <th>Amount</th>
+                                                                <th>Principal Balance</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-footer">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label style="margin-left: 15px">Reviewed by</label>
+                                        <div class="col-md-12">
+                                            @Html.DropDownListFor(model => model.reviewed_by_name,
+                                              new List<SelectListItem> {
+                                                   new SelectListItem { Value = "0" , Text = "Roger G. Largo" },
+                                                },
+                                              new { @class = "form-control", @id = "txtreviewed_by_name" })
+                                            @Html.ValidationMessageFor(model => model.reviewed_by_name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <input type="button" value="Review" class="btn btn-sm btn-danger btn-block pull-right" onclick="Review()" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <label style="margin-left: 15px">Approved by</label>
+                                        <div class="col-md-12">
+                                            @Html.DropDownListFor(model => model.approved_by_name,
+                                              new List<SelectListItem> {
+                                                   new SelectListItem { Value = "0" , Text = "Roger G. Largo" },
+                                                },
+                                              new { @class = "form-control", @id = "txtapproved_by_name" })
+                                            @Html.ValidationMessageFor(model => model.prepared_by_name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <input type="button" value="Approve" class="btn btn-sm btn-danger btn-block pull-right" onclick="Approve()" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-4">
+                                            <input type="button" value="Release" class="btn btn-sm btn-danger btn-block pull-right" onclick="Release()" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@*@Scripts.Render("~/Scripts/Functions/LoanProcessing/Initialization.js")
+@Scripts.Render("~/Scripts/Functions/LoanProcessing/variables.js")*@
+@*@Scripts.Render("~/Scripts/Functions/LoanProcessing/functions.js")
+@Scripts.Render("~/Scripts/Functions/LoanProcessing/textbox-onchange.js")
+@Scripts.Render("~/Scripts/Functions/LoanProcessing/textbox-focus.js")*@
+@Scripts.Render("~/Scripts/Functions/LoanProcessing/datetimepicker.js")
+@Scripts.Render("~/Scripts/Functions/LoanProcessing/update-loan-status.js")
+
+@*@Scripts.Render("~/Scripts/Functions/LoanProcessing/tabs.js")*@
+@*@Scripts.Render("~/Scripts/Functions/LoanProcessing/save.js")*@

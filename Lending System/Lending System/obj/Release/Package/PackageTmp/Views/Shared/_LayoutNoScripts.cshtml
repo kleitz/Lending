@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Lending System</title>
+
+    @Styles.Render("~/Content/metro-css-full")
+    @Styles.Render("~/Content/A-Custom/Tables/dataTables.bootstrap.min.css")
+    @Styles.Render("~/Content/A-Custom/Tables/responsive.bootstrap.min.css")
+    @Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+
+    @Styles.Render("~/Content/A-Custom/Tables/select2-bootstrap.css")
+    @Styles.Render("~/Content/A-Custom/Tables/select2.min.css")
+    @Styles.Render("~/Content/A-Custom/Tables/wizard-steps.css")
+    @Styles.Render("~/Content/A-Custom/Tables/toastr.css")
+    @Styles.Render("~/Content/A-Custom/Modal/modal.css")
+    @Styles.Render("~/Content/bootstrap-select.min.css")
+
+    <script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+    </script>
+
+    <style>
+        .grid .row {
+            background-color: transparent;
+            border: 0;
+            height: 50px;
+            padding-right: 0;
+        }
+
+            .grid .row .col-md-3 {
+                min-height: 150px;
+            }
+
+            .grid .row .col-md-6 {
+                min-height: 300px;
+            }
+    </style>
+
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/Home">
+                    <img alt="Brand" src="~/Images/Logo/logo.png" height="40" width="40" style="margin-top: -9px;">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["UserId"] != null)
+                    {
+                        <li><a>Welcome @Session["UserFullName"] </a></li>
+                        <li><a href="~/Account/Logout">Logout</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @*<div class="container body-content">
+        <br>
+        @RenderBody()
+
+    </div>*@
+
+    <br>
+    <br>
+    <br>
+    @RenderBody()
+    <br>
+    <br>
+    <br>
+    <div class="footer navbar-inverse navbar-fixed-bottom">
+
+        <div class="col-md-12" style="color:#eeeeee;margin-bottom:0px">
+            <h5>Lending System 1.0</h5>
+        </div>
+
+        <div style="clear:both"></div>
+
+    </div>
+
+</body>
+</html>

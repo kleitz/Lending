@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_lendingModelStoreContainer" CdmEntityContainer="db_lendingEntities">
+    <EntitySetMapping Name="tbl_customer">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_customer">
+        <MappingFragment StoreEntitySet="tbl_customer">
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+          <ScalarProperty Name="customer_no" ColumnName="customer_no" />
+          <ScalarProperty Name="date_registered" ColumnName="date_registered" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="middlename" ColumnName="middlename" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="civil_status" ColumnName="civil_status" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="contact_no" ColumnName="contact_no" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="birth_place" ColumnName="birth_place" />
+          <ScalarProperty Name="occupation" ColumnName="occupation" />
+          <ScalarProperty Name="credit_limit" ColumnName="credit_limit" />
+          <ScalarProperty Name="annual_income" ColumnName="annual_income" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_department">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_department">
+        <MappingFragment StoreEntitySet="tbl_department">
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+          <ScalarProperty Name="department" ColumnName="department" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_terminal">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_terminal">
+        <MappingFragment StoreEntitySet="tbl_terminal">
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+          <ScalarProperty Name="terminal" ColumnName="terminal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_user">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_user">
+        <MappingFragment StoreEntitySet="tbl_user">
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="user_rank_id" ColumnName="user_rank_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="system_type" ColumnName="system_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_user_rank">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_user_rank">
+        <MappingFragment StoreEntitySet="tbl_user_rank">
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+          <ScalarProperty Name="user_rank" ColumnName="user_rank" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_fees">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_fees">
+        <MappingFragment StoreEntitySet="tbl_fees">
+          <ScalarProperty Name="fees_description" ColumnName="fees_description" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_loan_type_charges">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_loan_type_charges">
+        <MappingFragment StoreEntitySet="tbl_loan_type_charges">
+          <ScalarProperty Name="loan_type_id" ColumnName="loan_type_id" />
+          <ScalarProperty Name="charge_type" ColumnName="charge_type" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_amortization">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_amortization">
+        <MappingFragment StoreEntitySet="tbl_amortization">
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="interest_rate" ColumnName="interest_rate" />
+          <ScalarProperty Name="principal_amount" ColumnName="principal_amount" />
+          <ScalarProperty Name="dute_date" ColumnName="dute_date" />
+          <ScalarProperty Name="loan_no" ColumnName="loan_no" />
+          <ScalarProperty Name="loan_id" ColumnName="loan_id" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_loan_type">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_loan_type">
+        <MappingFragment StoreEntitySet="tbl_loan_type">
+          <ScalarProperty Name="days" ColumnName="days" />
+          <ScalarProperty Name="interest_type" ColumnName="interest_type" />
+          <ScalarProperty Name="interest" ColumnName="interest" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_loan_processing_amortization_schedule">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_loan_processing_amortization_schedule">
+        <MappingFragment StoreEntitySet="tbl_loan_processing_amortization_schedule">
+          <ScalarProperty Name="loan_no" ColumnName="loan_no" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="interest" ColumnName="interest" />
+          <ScalarProperty Name="principal" ColumnName="principal" />
+          <ScalarProperty Name="due_date" ColumnName="due_date" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_loan_processing">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_loan_processing">
+        <MappingFragment StoreEntitySet="tbl_loan_processing">
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="approved_by_name" ColumnName="approved_by_name" />
+          <ScalarProperty Name="approved_by_id" ColumnName="approved_by_id" />
+          <ScalarProperty Name="reviewed_by_name" ColumnName="reviewed_by_name" />
+          <ScalarProperty Name="reviewed_by_id" ColumnName="reviewed_by_id" />
+          <ScalarProperty Name="prepared_by_name" ColumnName="prepared_by_name" />
+          <ScalarProperty Name="prepared_by_id" ColumnName="prepared_by_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="finance_charge_id" ColumnName="finance_charge_id" />
+          <ScalarProperty Name="amortization_id" ColumnName="amortization_id" />
+          <ScalarProperty Name="net_proceeds" ColumnName="net_proceeds" />
+          <ScalarProperty Name="total_receivable" ColumnName="total_receivable" />
+          <ScalarProperty Name="installment_no" ColumnName="installment_no" />
+          <ScalarProperty Name="loan_date" ColumnName="loan_date" />
+          <ScalarProperty Name="due_date" ColumnName="due_date" />
+          <ScalarProperty Name="payment_scheme" ColumnName="payment_scheme" />
+          <ScalarProperty Name="loan_interest_rate" ColumnName="loan_interest_rate" />
+          <ScalarProperty Name="loan_granted" ColumnName="loan_granted" />
+          <ScalarProperty Name="loan_name" ColumnName="loan_name" />
+          <ScalarProperty Name="loantype_id" ColumnName="loantype_id" />
+          <ScalarProperty Name="loan_no" ColumnName="loan_no" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_payment">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_payment">
+        <MappingFragment StoreEntitySet="tbl_payment">
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+          <ScalarProperty Name="payor_name" ColumnName="payor_name" />
+          <ScalarProperty Name="payor_id" ColumnName="payor_id" />
+          <ScalarProperty Name="date_trans" ColumnName="date_trans" />
+          <ScalarProperty Name="reference_no" ColumnName="reference_no" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_payment_details">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_payment_details">
+        <MappingFragment StoreEntitySet="tbl_payment_details">
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="due_date" ColumnName="due_date" />
+          <ScalarProperty Name="loan_name" ColumnName="loan_name" />
+          <ScalarProperty Name="loan_no" ColumnName="loan_no" />
+          <ScalarProperty Name="payment_type" ColumnName="payment_type" />
+          <ScalarProperty Name="reference_no" ColumnName="reference_no" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_loan_ledger">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_loan_ledger">
+        <MappingFragment StoreEntitySet="tbl_loan_ledger">
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="principal" ColumnName="principal" />
+          <ScalarProperty Name="amount_paid" ColumnName="amount_paid" />
+          <ScalarProperty Name="interest" ColumnName="interest" />
+          <ScalarProperty Name="interest_rate" ColumnName="interest_rate" />
+          <ScalarProperty Name="interest_type" ColumnName="interest_type" />
+          <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="loan_type_name" ColumnName="loan_type_name" />
+          <ScalarProperty Name="loan_no" ColumnName="loan_no" />
+          <ScalarProperty Name="reference_no" ColumnName="reference_no" />
+          <ScalarProperty Name="trans_type" ColumnName="trans_type" />
+          <ScalarProperty Name="date_trans" ColumnName="date_trans" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_cash_out">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_cash_out">
+        <MappingFragment StoreEntitySet="tbl_cash_out">
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="dateto" ColumnName="dateto" />
+          <ScalarProperty Name="datefrom" ColumnName="datefrom" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="date_trans" ColumnName="date_trans" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_end_of_day_transactions">
+      <EntityTypeMapping TypeName="db_lendingModel.tbl_end_of_day_transactions">
+        <MappingFragment StoreEntitySet="tbl_end_of_day_transactions">
+          <ScalarProperty Name="cash_end" ColumnName="cash_end" />
+          <ScalarProperty Name="date_created" ColumnName="date_created" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="cash_pulled_out" ColumnName="cash_pulled_out" />
+          <ScalarProperty Name="cash_collected" ColumnName="cash_collected" />
+          <ScalarProperty Name="cash_release" ColumnName="cash_release" />
+          <ScalarProperty Name="cash_begin" ColumnName="cash_begin" />
+          <ScalarProperty Name="date_trans" ColumnName="date_trans" />
+          <ScalarProperty Name="autonum" ColumnName="autonum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

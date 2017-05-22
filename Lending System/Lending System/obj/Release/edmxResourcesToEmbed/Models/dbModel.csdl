@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_lendingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_customer">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_no" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="date_registered" Type="DateTime" />
+    <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="civil_status" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="contact_no" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_of_birth" Type="DateTime" />
+    <Property Name="birth_place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="occupation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="credit_limit" Type="Decimal" />
+    <Property Name="annual_income" Type="Decimal" />
+  </EntityType>
+  <EntityType Name="tbl_department">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_terminal">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="terminal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_user">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="user_rank_id" Type="Int32" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="system_type" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_user_rank">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_rank" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="db_lendingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_customer" EntityType="Self.tbl_customer" />
+    <EntitySet Name="tbl_department" EntityType="Self.tbl_department" />
+    <EntitySet Name="tbl_terminal" EntityType="Self.tbl_terminal" />
+    <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+    <EntitySet Name="tbl_user_rank" EntityType="Self.tbl_user_rank" />
+    <EntitySet Name="tbl_fees" EntityType="db_lendingModel.tbl_fees" />
+    <EntitySet Name="tbl_loan_type_charges" EntityType="db_lendingModel.tbl_loan_type_charges" />
+    <EntitySet Name="tbl_amortization" EntityType="db_lendingModel.tbl_amortization" />
+    <EntitySet Name="tbl_loan_type" EntityType="db_lendingModel.tbl_loan_type" />
+    <EntitySet Name="tbl_loan_processing_amortization_schedule" EntityType="db_lendingModel.tbl_loan_processing_amortization_schedule" />
+    <EntitySet Name="tbl_loan_processing" EntityType="db_lendingModel.tbl_loan_processing" />
+    <EntitySet Name="tbl_payment" EntityType="db_lendingModel.tbl_payment" />
+    <EntitySet Name="tbl_payment_details" EntityType="db_lendingModel.tbl_payment_details" />
+    <EntitySet Name="tbl_loan_ledger" EntityType="db_lendingModel.tbl_loan_ledger" />
+    <EntitySet Name="tbl_cash_out" EntityType="db_lendingModel.tbl_cash_out" />
+    <EntitySet Name="tbl_end_of_day_transactions" EntityType="db_lendingModel.tbl_end_of_day_transactions" />
+  </EntityContainer>
+  <EntityType Name="tbl_fees">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fees_description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_loan_type_charges">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="amount" Type="Decimal" />
+    <Property Name="charge_type" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="loan_type_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_amortization">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="loan_id" Type="Int32" />
+    <Property Name="loan_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dute_date" Type="DateTime" />
+    <Property Name="principal_amount" Type="Decimal" />
+    <Property Name="interest_rate" Type="Decimal" />
+    <Property Name="amount" Type="Decimal" />
+    <Property Name="balance" Type="Decimal" />
+  </EntityType>
+  <EntityType Name="tbl_loan_type">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="code" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="interest" Type="Decimal" />
+    <Property Name="interest_type" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="days" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tbl_loan_processing_amortization_schedule">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="due_date" Type="DateTime" />
+    <Property Name="principal" Type="Decimal" />
+    <Property Name="interest" Type="Decimal" />
+    <Property Name="amount" Type="Decimal" />
+    <Property Name="balance" Type="Decimal" />
+    <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="loan_no" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_loan_processing">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="customer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="loan_no" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="loantype_id" Type="Int32" />
+    <Property Name="loan_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="loan_granted" Type="Decimal" />
+    <Property Name="loan_interest_rate" Type="Decimal" />
+    <Property Name="payment_scheme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="due_date" Type="DateTime" />
+    <Property Name="loan_date" Type="DateTime" />
+    <Property Name="installment_no" Type="Int32" />
+    <Property Name="total_receivable" Type="Decimal" />
+    <Property Name="net_proceeds" Type="Decimal" />
+    <Property Name="amortization_id" Type="Int32" />
+    <Property Name="finance_charge_id" Type="Int32" />
+    <Property Name="status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="prepared_by_id" Type="Int32" />
+    <Property Name="prepared_by_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reviewed_by_id" Type="Int32" />
+    <Property Name="reviewed_by_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="approved_by_id" Type="Int32" />
+    <Property Name="approved_by_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_created" Type="DateTime" />
+    <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_payment">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reference_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_trans" Type="DateTime" />
+    <Property Name="payor_id" Type="Int32" />
+    <Property Name="payor_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="total_amount" Type="Decimal" />
+    <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_created" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="tbl_payment_details">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reference_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="payment_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="loan_no" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="loan_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="due_date" Type="DateTime" />
+    <Property Name="amount" Type="Decimal" />
+    <Property Name="date_created" Type="DateTime" />
+    <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_loan_ledger">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date_trans" Type="DateTime" />
+    <Property Name="trans_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reference_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="loan_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="loan_type_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_id" Type="Int32" />
+    <Property Name="customer_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="interest_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="interest_rate" Type="Decimal" />
+    <Property Name="interest" Type="Decimal" />
+    <Property Name="amount_paid" Type="Decimal" />
+    <Property Name="principal" Type="Decimal" />
+    <Property Name="balance" Type="Decimal" />
+    <Property Name="date_created" Type="DateTime" />
+    <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_cash_out">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date_trans" Type="DateTime" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="datefrom" Type="DateTime" />
+    <Property Name="dateto" Type="DateTime" />
+    <Property Name="amount" Type="Decimal" />
+    <Property Name="date_created" Type="DateTime" />
+    <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_end_of_day_transactions">
+    <Key>
+      <PropertyRef Name="autonum" />
+    </Key>
+    <Property Name="autonum" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date_trans" Type="DateTime" />
+    <Property Name="cash_begin" Type="Decimal" />
+    <Property Name="cash_release" Type="Decimal" />
+    <Property Name="cash_collected" Type="Decimal" />
+    <Property Name="cash_pulled_out" Type="Decimal" />
+    <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="date_created" Type="DateTime" />
+    <Property Name="cash_end" Type="Decimal" />
+  </EntityType>
+</Schema>

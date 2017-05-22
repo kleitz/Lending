@@ -1,0 +1,123 @@
+﻿@model Lending_System.Models.tbl_user_validation_registration
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_LayoutEmptyBody.cshtml";
+}
+
+   <div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <img alt="Brand" src="~/Images/Logo/logo.png" height="200" width="200" style="margin-top: -9px;">
+            </div>
+        </div>
+        <div class="main-login main-center container-login">
+            <form class="form-horizontal" id="myForm">
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(m => m.firstname, new { @required = "", @autofocus = "", @class = "form-control", @placeholder = "First Name" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.firstname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(m => m.lastname, new { @class = "form-control", @placeholder = "Last Name" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.lastname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(m => m.email, new { @class = "form-control", @placeholder = "Email" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Username" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            @Html.PasswordFor(m => m.cpassword, new { @class = "form-control", @placeholder = "Confirm your Password" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.cpassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="radio">
+                    <label class="control-label" for="gender">
+                        @*<input type="radio" name="gender" id="gender" value="Female" tabindex="3" />*@ @*Female*@
+                        @Html.RadioButtonFor(m => m.gender, "Female") Female
+                    </label>
+                    <label class="control-label" for="gender">
+                        @*<input type="radio" name="gender" id="gender" value="Male" tabindex="4" />*@ @*Male*@
+                        @Html.RadioButtonFor(m => m.gender, "Male") Male
+                    </label>
+                </div>
+
+                <br />
+
+                <div class="form-group ">
+                    <button type="button" class="btn btn-lg btn-primary" onclick="Registration()">Register</button>
+                    @*<a href="#" class="btn btn-lg btn-primary" onclick="Register()">Submit</a>*@
+                </div>
+                <div class="login-register">
+                    @Html.ActionLink("Login", "Login", "Account")
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+        var Registration = function () {
+        debugger
+        var data = $("#myForm").serialize();
+
+        if (!$("#myForm").valid()) {
+            return false;
+        }
+
+        $.ajax({
+            type: "Post",
+            url: "@Url.Action("Registration", "Account")",
+            data: data,
+            success: function (response) {
+                if (response == "Success") {
+                    alert("Registration Successful!");
+                    window.location.href = "@Url.Action("Login", "Account")"
+                    console.log("success")
+                }
+                else {
+                    alert("Registration Failed!");
+                    window.location.href = "@Url.Action("Registration", "Account")"
+                }
+            }
+        })
+    }
+
+</script>
+

@@ -1,0 +1,24 @@
+﻿body {
+    font-family: Open Sans;
+    font-size: 14px;
+    line-height: 1.42857;
+    background: #333333;
+    height: 350px;
+    padding: 0;
+    margin: 0;
+}
+.container-login button {
+    background-color: #ea533f;
+    border-color: #e73e28;
+    color: #ffffff;
+    border-radius: 0;
+    font-size: 18px;
+    line-height: 1.33;
+    padding: 10px 16px;
+    width: 100%;
+}
+.container-login button:hover,
+.container-login button:focus {
+    background: #de2f18;
+    border-color: #be2815;
+}

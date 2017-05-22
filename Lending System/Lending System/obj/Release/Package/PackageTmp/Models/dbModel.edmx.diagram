@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2412a1a51399412d8d4239d2dde06e1a" Name="Diagram1">
+        <EntityTypeShape EntityType="db_lendingModel.tbl_customer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_department" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_terminal" Width="1.5" PointX="11.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_user" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_user_rank" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_fees" Width="1.5" PointX="6.75" PointY="1.125" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_loan_type_charges" Width="1.5" PointX="8.375" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_amortization" Width="1.5" PointX="10" PointY="2.625" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_loan_type" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_loan_processing_amortization_schedule" Width="1.5" PointX="8.375" PointY="3.625" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_loan_processing" Width="1.5" PointX="13.25" PointY="1" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_payment" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_payment_details" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_loan_ledger" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_cash_out" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_end_of_day_transactions" Width="1.5" PointX="10.25" PointY="7" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

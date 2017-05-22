@@ -1,0 +1,197 @@
+﻿@model Lending_System.Models.tbl_customer_validation
+
+@{
+    ViewBag.Title = "Add Customer";
+    Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
+}
+<div class="container">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title" style="color:#ffffff"><strong>Customer Detail</strong></h3>
+            <div class="btn-danger pull-right" style="margin-top:-18px">
+                @Html.ActionLink("Back", "Index", "Customer", null, new { @class = "btn btn-xs ", @style = "font-family: Open Sans; color:#fff", @id = "back" })
+            </div>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" id="myForm">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="margin-left: 0px">Customer No</label>
+                                <div class="col-md-12"  style="margin-left: -15px">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(m => m.customer_no, new { @readonly = "true", @class = "form-control", @Value = "00000" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label style="margin-left: 0px">Date</label>
+                                <div class="col-md-12">
+                                    <div class="input-group" style="margin-left: -80px">
+                                        @Html.TextBoxFor(m => m.date_registered, new { @readonly = "true", @class = "form-control", @Value = @DateTime.Now.ToShortDateString() })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.lastname, new { @required = "", @class = "form-control", @placeholder = "Last Name" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.firstname, new { @required = "", @class = "form-control", @placeholder = "First Name" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Middle Name</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.middlename, new { @required = "", @class = "form-control", @placeholder = "Middle Name" })
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        <label>Civil Status</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.civil_status, new { @required = "", @class = "form-control", @placeholder = "Civil Status" })
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        <label>Address</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.address, new { @required = "", @class = "form-control", @placeholder = "Address" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">
+                            @Html.RadioButtonFor(m => m.civil_status, "S") Single
+                        </label>
+                        <label class="control-label">
+                            @Html.RadioButtonFor(m => m.civil_status, "M") Married
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Contact No.</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.contact_no, new { @type = "number", @required = "", @class = "form-control", @placeholder = "Contact No." })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.email, new { @required = "", @class = "form-control", @placeholder = "Email" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <div class='input-group date col-md-10'>
+                            @Html.TextBoxFor(m => m.date_of_birth, new { @class = "form-control", @id = "txtdate_of_birth" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Birth Place</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.birth_place, new { @required = "", @class = "form-control", @placeholder = "Birth Place" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Occupation</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.occupation, new { @required = "", @class = "form-control", @placeholder = "Occupation" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Credit Limit</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.credit_limit, new { @style = "text-align: right", @type = "number",  @required = "", @class = "form-control", @placeholder = "0,000.00" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Annual Income</label>
+                        <div class="input-group col-md-10">
+                            @Html.TextBoxFor(m => m.annual_income, new { @style = "text-align: right",  @type = "number", @required = "", @class = "form-control", @placeholder = "0,000.00" })
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <button type="button" class="btn btn-lg btn-success" onclick="AddCustomer()">Save</button>
+                        <button type="button" class="btn btn-lg btn-danger" onclick="Cancel()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validation")
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+
+@Scripts.Render("~/Scripts/Datas/custom-common.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/select2.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/toastr.min.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/responsive.bootstrap.min.js")
+@Scripts.Render("~/Scripts/bootstrap-select.min.js")
+
+<script type="text/javascript">
+            $(function () {
+                $('#txtdate_of_birth').datetimepicker({
+                    viewMode: 'years',
+                    format: 'MM/DD/YYYY'
+                });
+
+            });
+</script>
+<script type="text/javascript">
+    var AddCustomer = function () {
+        
+        var data = $("#myForm").serialize();
+
+        //if (!$("#myForm").valid()) {
+        //    console.log(data)
+        //    return false;
+        //}
+
+        $.ajax({
+            type: "Post",
+            url: "@Url.Action("AddCustomer", "Customer")",
+            data: data,
+        success: function (response) {
+            if (response != "Success") {
+                alert("Failed!");
+                window.location.href = "@Url.Action("AddCustomer", "Customer")"
+            }
+            else {
+                //alert("Success!");
+                window.location.href = "@Url.Action("Index", "Customer")"
+            }
+        }
+    })
+
+    }
+    var Cancel = function () {
+        window.location.href = "@Url.Action("Index", "Customer")"
+    }
+</script>
