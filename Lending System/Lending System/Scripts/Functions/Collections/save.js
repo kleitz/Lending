@@ -140,6 +140,7 @@ function AjaxSaveLedger() {
 
     var principal_payment;
     var interest_payment;
+    var total_payment;
 
     var principalArray = [[], []];
     var InterestArray = [[], []];
@@ -152,6 +153,7 @@ function AjaxSaveLedger() {
         rowTextP = document.getElementById("principal-payment-table").rows[i].cells[0].innerText;
         principal_payment = 0;
         interest_payment = 0;
+        total_payment = 0;
 
         found = false;
 
@@ -180,18 +182,16 @@ function AjaxSaveLedger() {
                         var iparam6 = document.getElementById("interest-payment-table").rows[ii].cells[5].innerText;//interest_type
                         var iparam7 = document.getElementById("interest-payment-table").rows[ii].cells[6].innerText;//interest_rate
 
-                        interest_payment = iparam5;
-
-                        AjaxSaveLedgerDetail("OR Payment", ref_no, iparam1, iparam2, iparam6, iparam7, interest_payment, iparam5 + principal_payment, iparam5, "0");
+                        interest_payment = interest_payment + iparam5;                      
                     }
-                }
-                else {
-                    //AjaxSaveLedgerDetail("OR Payment", ref_no, param1, param2, param6, param7, interest_payment, principal_payment, param5, "0");
                 }
             }
 
             if (found == false) {
                 AjaxSaveLedgerDetail("OR Payment", ref_no, param1, param2, param6, param7, interest_payment, principal_payment, param5, "0");
+            }
+            else {
+                AjaxSaveLedgerDetail("OR Payment", ref_no, iparam1, iparam2, iparam6, iparam7, interest_payment, interest_payment + principal_payment, principal_payment, "0");
             }
         }
     }
