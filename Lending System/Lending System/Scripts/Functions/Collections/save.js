@@ -186,7 +186,7 @@ function AjaxSaveLedger() {
                     }
                 }
                 else {
-                    AjaxSaveLedgerDetail("OR Payment", ref_no, param1, param2, param6, param7, interest_payment, principal_payment, param5, "0");
+                    //AjaxSaveLedgerDetail("OR Payment", ref_no, param1, param2, param6, param7, interest_payment, principal_payment, param5, "0");
                 }
             }
 
