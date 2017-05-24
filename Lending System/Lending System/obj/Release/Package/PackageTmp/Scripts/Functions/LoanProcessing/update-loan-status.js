@@ -31,13 +31,13 @@ var AmortizationTable =
 
 function CreateSchedule() {
     var id = $('#txtloantype_id').val()
-    debugger
+    
     $.ajax({
         url: RootUrl + "LoanProcessing/LoadLoanTypeInterestType?id=" + id,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response, data, status, xhr) {
-            debugger
+            
             CreateSchedule1(response)
         },
         error: ""
@@ -108,7 +108,7 @@ function CreateAmortizationSchedule(due_date, loan_granted, interest, total_rece
 
     var interest = interest / installment;;
     var amount = tbl_principal + interest;
-    debugger
+    
     for (i = 0; i < installment; i++) {
         line_no = table.rows().eq(0).length + 1;
         

@@ -276,16 +276,23 @@ namespace Lending_System.Controllers
         }
         public void LoadCustomer()
         {
-            var CustomerList = new List<SelectListItem>();
-            var dbQuery = from d in db.tbl_customer select d;
-            foreach (var d in dbQuery)
+            try
             {
-                if (d.firstname.Trim() != "")
+                var CustomerList = new List<SelectListItem>();
+                var dbQuery = from d in db.tbl_customer select d;
+                foreach (var d in dbQuery)
                 {
-                    CustomerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname + ", " + d.firstname + " " + d.middlename });
+                    if (d.firstname != "" || d.firstname != null)
+                    {
+                        CustomerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname + ", " + d.firstname + " " + d.middlename });
+                    }
                 }
+                ViewBag.Customer = new SelectList(CustomerList, "Value", "Text");
             }
-            ViewBag.Customer = new SelectList(CustomerList, "Value", "Text");
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public void LoadLoanType()
         {

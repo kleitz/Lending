@@ -18,30 +18,23 @@ function AjaxSave() {
         type: "POST",
         data: JSON.stringify(myObj),
         contentType: 'application/json',
-        success: function (response, status, xhr) {
-            if (response != "Success") {
-
-                deferred.reject();
-            }
-            else {
-                AjaxSaveDetailsInterest();
-                AjaxSaveDetailsPrincipal();
-                AjaxSaveToLedger();
-
-                toastr.success('Successfully saved.', 'Save');
-                deferred.resolve();
-            }
-        },
-        error: ""
+        success: function (data) { },
+        error: function (data) { },
+        complete: function (data) {
+            $.when(AjaxSaveDetailsInterest().done(AjaxSaveDetailsPrincipal().done(AjaxSaveLedger()))).then(
+              toastr.success('Successfully saved.', 'Save')
+            ).done(window.location.href = RootUrl + "Collections/Index");
+        }
     });
-  
-    window.location.href = RootUrl + "Collections/Index"
 
-    return deferred.promise();
+    //AjaxSaveDetailsInterest();
+    //AjaxSaveDetailsPrincipal();
+    //AjaxSaveToLedger();
 }
 //STEP 1
 function AjaxSaveDetailsInterest() {
     var deferred = $.Deferred();
+
     var totalRowCount = $("#interest-payment-table tr").length;
     var rowText;
     var ref_no = $('#txtreference_no').val();
@@ -51,7 +44,6 @@ function AjaxSaveDetailsInterest() {
         rowText = document.getElementById("interest-payment-table").rows[i].cells[0].innerText;
 
         if (rowText == "No data available in table") {
-            AjaxSaveDetailsPrincipal();
             deferred.resolve();
         }
         else {
@@ -79,17 +71,18 @@ function AjaxSaveDetailsInterest() {
                     type: "POST",
                     data: JSON.stringify(myObj),
                     contentType: 'application/json',
-                    success: function (response, status, xhr) {
-                    },
-                    error: ""
+                    success: function (response) { deferred.resolve(); },
+                    error: function (response) { deferred.reject(); }
                 });
             }        
         }
     }
+    return deferred.promise();
 }
 //STEP 2
 function AjaxSaveDetailsPrincipal() {
-    var deffered = $.Deferred();
+    var deferred = $.Deferred();
+
     var totalRowCount = $("#principal-payment-table tr").length;
     var rowText;
     var ref_no = $('#txtreference_no').val();
@@ -127,27 +120,98 @@ function AjaxSaveDetailsPrincipal() {
                     type: "POST",
                     data: JSON.stringify(myObj),
                     contentType: 'application/json',
-                    success: function (response, status, xhr) {
-
-                    },
-                    error: ""
+                    success: function (response) { deferred.resolve(); },
+                    error: function (response) { deferred.reject(); }
                 });
             }      
+        }
+    }
+    return deferred.promise();
+}
+
+
+function AjaxSaveLedger() {
+    var totalRowCountP = $("#principal-payment-table tr").length;
+    var rowTextP;
+    var totalRowCountI = $("#interest-payment-table tr").length;
+    var rowTextI;
+
+    var ref_no = $('#txtreference_no').val();
+
+    var principal_payment;
+    var interest_payment;
+
+    var principalArray = [[], []];
+    var InterestArray = [[], []];
+
+    var found = false;
+
+    debugger
+
+    for (var i = 1; i < totalRowCountP; i++) {
+        rowTextP = document.getElementById("principal-payment-table").rows[i].cells[0].innerText;
+        principal_payment = 0;
+        interest_payment = 0;
+
+        found = false;
+
+        if (rowTextP != "No data available in table") {
+            var param1 = document.getElementById("principal-payment-table").rows[i].cells[0].innerText;//loan_no
+            var param2 = document.getElementById("principal-payment-table").rows[i].cells[1].innerText;//loan_name
+            var param3 = document.getElementById("principal-payment-table").rows[i].cells[2].innerText;//due_date
+            var param4 = parseFloat(document.getElementById("principal-payment-table").rows[i].cells[3].innerText.replace(/[^0-9\.]+/g, ""));//amount_due
+            var param5 = parseFloat(document.getElementById("principal-payment-table").rows[i].cells[4].innerText.replace(/[^0-9\.]+/g, ""));//payment
+            var param6 = document.getElementById("principal-payment-table").rows[i].cells[5].innerText;//interest_type
+            var param7 = document.getElementById("principal-payment-table").rows[i].cells[6].innerText;//interest_rate
+
+            principal_payment = param5;
+
+            for (var ii = 1; ii < totalRowCountI; ii++) {
+                rowTextI = document.getElementById("interest-payment-table").rows[ii].cells[0].innerText;
+
+                if (rowTextI != "No data available in table") {
+                    if (param1 == document.getElementById("interest-payment-table").rows[ii].cells[0].innerText) {
+                        found = true
+                        var iparam1 = document.getElementById("interest-payment-table").rows[ii].cells[0].innerText;//loan_no
+                        var iparam2 = document.getElementById("interest-payment-table").rows[ii].cells[1].innerText;//loan_name
+                        var iparam3 = document.getElementById("interest-payment-table").rows[ii].cells[2].innerText;//due_date
+                        var iparam4 = parseFloat(document.getElementById("interest-payment-table").rows[ii].cells[3].innerText.replace(/[^0-9\.]+/g, ""));//amount_due
+                        var iparam5 = parseFloat(document.getElementById("interest-payment-table").rows[ii].cells[4].innerText.replace(/[^0-9\.]+/g, ""));//payment
+                        var iparam6 = document.getElementById("interest-payment-table").rows[ii].cells[5].innerText;//interest_type
+                        var iparam7 = document.getElementById("interest-payment-table").rows[ii].cells[6].innerText;//interest_rate
+
+                        interest_payment = iparam5;
+
+                        AjaxSaveLedgerDetail("OR Payment", ref_no, iparam1, iparam2, iparam6, iparam7, interest_payment, iparam5 + principal_payment, iparam5, "0");
+                    }
+                }
+                else {
+                    AjaxSaveLedgerDetail("OR Payment", ref_no, param1, param2, param6, param7, interest_payment, principal_payment, param5, "0");
+                }
+            }
+
+            if (found == false) {
+                AjaxSaveLedgerDetail("OR Payment", ref_no, param1, param2, param6, param7, interest_payment, principal_payment, param5, "0");
+            }
         }
     }
 }
 
 function AjaxSaveToLedger() {
+
     var totalRowCount1 = $("#interest-payment-table tr").length;
     var rowText1;
+
     var ref_no = $('#txtreference_no').val();
+
+    var principal_payment;
     var interest_payment;
 
 
     for (var i = 1; i < totalRowCount1; i++) {
 
         rowText1 = document.getElementById("interest-payment-table").rows[i].cells[0].innerText;
-        
+        debugger
         if (rowText1 == "No data available in table") {
             interest_payment = 0;
 
@@ -216,6 +280,8 @@ function AjaxSaveToLedger() {
 }
 
 function AjaxSaveLedgerDetail(trans_type, reference_no, loan_id, loan_name, interest_type, interest_rate, interest, amount_paid, principal, balance) {
+    var deferred = $.Deferred();
+
     var ref_no = $('#txtreference_no').val();
     
     var myObj = {
@@ -242,12 +308,9 @@ function AjaxSaveLedgerDetail(trans_type, reference_no, loan_id, loan_name, inte
         type: "POST",
         data: JSON.stringify(myObj),
         contentType: 'application/json',
-        success: function (response, status, xhr) {
-
-        },
-        error: ""
+        success: function (response) { deferred.resolve(); },
+        error: function (response) { deferred.reject(); }
     });
-}
-//SAVING PROCESS
 
-//AjaxSavePrincipalLedger("OR Payment", ref_no, param1, param2, param6, param7, interest_payment, param5 + interest_payment, param5, "0");
+    return deferred.promise();
+}

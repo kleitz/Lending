@@ -24,6 +24,7 @@ function ShowModalPayment() {
     }
     else {
         AjaxSave();
+        //TryDeferred();
     }
 };
 function HideModalPayment() {
@@ -63,13 +64,13 @@ function PrepareSave() {
 
             if (payment >= amountdue_number) {
 
-                $('#interest-payment-table').dataTable().fnUpdate(amountdue_number, $("#principal-payment-table tr")[i], 4);
+                $('#interest-payment-table').dataTable().fnUpdate(amountdue_number, $("#interest-payment-table tr")[i], 4);
                 interestpayment = interestpayment + amountdue_number;
                 payment = payment - amountdue_number;
             }
             else if (payment < amountdue_number) {
 
-                $('#interest-payment-table').dataTable().fnUpdate(payment, $("#principal-payment-table tr")[i], 4);
+                $('#interest-payment-table').dataTable().fnUpdate(payment, $("#interest-payment-table tr")[i], 4);
                 interestpayment = interestpayment + payment;
                 payment = payment - payment;
             }

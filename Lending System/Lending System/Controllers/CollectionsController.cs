@@ -61,16 +61,23 @@ namespace Lending_System.Controllers
         //Functions
         public void LoadCustomer()
         {
-            var CustomerList = new List<SelectListItem>();
-            var dbQuery = from d in db.tbl_customer select d;
-            foreach (var d in dbQuery)
+            try
             {
-                if (d.firstname.Trim() != "")
+                var CustomerList = new List<SelectListItem>();
+                var dbQuery = from d in db.tbl_customer select d;
+                foreach (var d in dbQuery)
                 {
-                    CustomerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname + ", " + d.firstname + " " + d.middlename });
+                    if (d.firstname != "" || d.firstname != null)
+                    {
+                        CustomerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname + ", " + d.firstname + " " + d.middlename });
+                    }
                 }
+                ViewBag.Customer = new SelectList(CustomerList, "Value", "Text");
             }
-            ViewBag.Customer = new SelectList(CustomerList, "Value", "Text");
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public async Task<ActionResult> getReferenceNo()
         {
@@ -150,6 +157,9 @@ namespace Lending_System.Controllers
         public JsonResult LoadInterestDues(long? id)
         {
             db_lendingEntities db = new db_lendingEntities();
+
+            var datetimenow = DateTime.Now;
+            var datenow = datetimenow.Date;
 
             if (Session["UserId"] != null)
             {

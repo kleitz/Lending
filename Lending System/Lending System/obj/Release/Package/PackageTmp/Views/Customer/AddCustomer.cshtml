@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
 }
 <div class="container">
-    <div class="panel panel-danger">
+    <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title" style="color:#ffffff"><strong>Customer Detail</strong></h3>
             <div class="btn-danger pull-right" style="margin-top:-18px">
@@ -169,11 +169,6 @@
         
         var data = $("#myForm").serialize();
 
-        //if (!$("#myForm").valid()) {
-        //    console.log(data)
-        //    return false;
-        //}
-
         $.ajax({
             type: "Post",
             url: "@Url.Action("AddCustomer", "Customer")",
@@ -184,7 +179,6 @@
                 window.location.href = "@Url.Action("AddCustomer", "Customer")"
             }
             else {
-                //alert("Success!");
                 window.location.href = "@Url.Action("Index", "Customer")"
             }
         }

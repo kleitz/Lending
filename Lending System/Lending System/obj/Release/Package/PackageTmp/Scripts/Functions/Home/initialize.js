@@ -7,6 +7,8 @@ $(document).ready(function () {
     $('input.number').number(true, 2);
     $('span.number').number(true, 4);
 
+    GetCashReleased();
+
     setInterval(function () {
         table.ajax.reload();
     }, 10000);

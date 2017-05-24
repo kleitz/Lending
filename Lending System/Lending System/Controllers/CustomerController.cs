@@ -64,20 +64,112 @@ namespace Lending_System.Controllers
 
                 tbl_customer tbl = new tbl_customer();
 
-                tbl.customer_no = model.customer_no;
-                tbl.date_registered = model.date_registered;
-                tbl.lastname = model.lastname;
-                tbl.firstname = model.firstname;
-                tbl.middlename = model.middlename;
-                tbl.civil_status = model.civil_status;
-                tbl.address = model.address;              
-                tbl.contact_no = model.contact_no;
-                tbl.email = model.email;
-                tbl.date_of_birth = model.date_of_birth;
-                tbl.birth_place = model.birth_place;
-                tbl.occupation = model.occupation;
-                tbl.credit_limit = model.credit_limit;
-                tbl.annual_income = model.annual_income;
+                if (model.date_registered != null)
+                {
+                    tbl.customer_no = model.customer_no;
+                }
+                else
+                {
+                    tbl.date_registered = model.date_registered;
+                }
+                //
+                if (model.lastname != null)
+                {
+                    tbl.lastname = model.lastname.ToUpper();
+                }
+                else
+                {
+
+                }
+                if (model.firstname != null)
+                {
+                    tbl.firstname = model.firstname.ToUpper();
+                }
+                else
+                {
+
+                }
+                //
+                if (model.middlename != null)
+                {
+                    tbl.middlename = model.middlename.ToUpper();
+                }
+                else
+                {
+
+                }
+                if (model.civil_status != null)
+                {
+                    tbl.civil_status = model.civil_status;
+                }
+                else
+                {
+
+                }
+                if (model.address != null)
+                {
+                    tbl.address = model.address.ToUpper();
+                }
+                else
+                {
+
+                }
+                if (model.contact_no != null)
+                {
+                    tbl.contact_no = model.contact_no;
+                }
+                else
+                {
+
+                }
+                if (model.email != null)
+                {
+                    tbl.email = model.email;
+                }
+                else
+                {
+
+                }
+                if (model.date_of_birth != null)
+                {
+                    tbl.date_of_birth = model.date_of_birth;
+                }
+                else
+                {
+
+                }
+                if (model.birth_place != null)
+                {
+                    tbl.birth_place = model.birth_place.ToUpper();
+                }
+                else
+                {
+
+                }
+                if (model.occupation != null)
+                {
+                    tbl.occupation = model.occupation.ToUpper();
+                }
+                else
+                {
+
+                }
+                if (model.credit_limit != null)
+                {
+                    tbl.credit_limit = model.credit_limit;
+                }
+                else
+                {
+
+                }
+                if (model.annual_income != null)
+                {
+                    tbl.annual_income = model.annual_income;
+                }
+                else
+                {
+
+                }
 
                 db.tbl_customer.Add(tbl);
 

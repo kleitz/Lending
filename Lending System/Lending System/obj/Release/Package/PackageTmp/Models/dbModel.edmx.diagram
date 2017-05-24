@@ -17,7 +17,7 @@
         <EntityTypeShape EntityType="db_lendingModel.tbl_loan_processing_amortization_schedule" Width="1.5" PointX="8.375" PointY="3.625" />
         <EntityTypeShape EntityType="db_lendingModel.tbl_loan_processing" Width="1.5" PointX="13.25" PointY="1" />
         <EntityTypeShape EntityType="db_lendingModel.tbl_payment" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="db_lendingModel.tbl_payment_details" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="db_lendingModel.tbl_payment_details" Width="1.875" PointX="3.375" PointY="7.75" />
         <EntityTypeShape EntityType="db_lendingModel.tbl_loan_ledger" Width="1.5" PointX="5.375" PointY="4.75" />
         <EntityTypeShape EntityType="db_lendingModel.tbl_cash_out" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="db_lendingModel.tbl_end_of_day_transactions" Width="1.5" PointX="10.25" PointY="7" />
