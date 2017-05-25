@@ -132,7 +132,7 @@ namespace Lending_System.Controllers
                     {
                         foreach (var data in result)
                         {
-                            balance = balance + (decimal)data.total_receivable;
+                            balance = balance + (decimal)data.net_proceeds;
                         }
                     }
                 }
