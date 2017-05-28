@@ -1,0 +1,194 @@
+﻿@model Lending_System.Models.tbl_customer
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validation")
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+
+@Scripts.Render("~/Scripts/Datas/custom-common.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/select2.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/toastr.min.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/responsive.bootstrap.min.js")
+@Scripts.Render("~/Scripts/bootstrap-select.min.js")
+@Scripts.Render("~/Scripts/jquery.number.min.js")
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><strong>Customer Detail</strong></h3>
+        </div>
+        <div class="panel-body">
+           @using (Html.BeginForm())
+           {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.autonum, new { @id = "autonum" })
+
+                <div class="form-group">
+                    @Html.Label("Customer No", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.customer_no, new { htmlAttributes = new { @class = "form-control", @id = "customer_no", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.customer_no, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Date Registered", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.date_registered, new { htmlAttributes = new { @class = "form-control", @id = "date_registered", @readonly = "true" } })
+                        @Html.ValidationMessageFor(model => model.date_registered, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("First Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.firstname, new { htmlAttributes = new { @class = "form-control", @id = "firstname", @autofocus = "true" } })
+                        @Html.ValidationMessageFor(model => model.firstname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Middle Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.middlename, new { htmlAttributes = new { @class = "form-control", @id = "middlename" } })
+                        @Html.ValidationMessageFor(model => model.middlename, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.lastname, new { htmlAttributes = new { @class = "form-control", @id = "lastname" } })
+                        @Html.ValidationMessageFor(model => model.lastname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @if (Model.civil_status == "S")
+                {
+                    <div class="form-group">
+                        @Html.Label("Civil Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-1">
+                            @Html.RadioButtonFor(m => m.civil_status, "S", new { htmlAttributes = new { @active = "true", @id = "civil_status" } })Single
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(m => m.civil_status, "M", new { htmlAttributes = new { @id = "civil_status" } })Married
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        @Html.Label("Civil Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-1">
+                            @Html.RadioButtonFor(m => m.civil_status, "S", new { htmlAttributes = new { @id = "civil_status" } })Single
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(m => m.civil_status, "M", new { htmlAttributes = new { @active = "true", @id = "civil_status" } })Married
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group">
+                    @Html.Label("Address", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control", @id = "address" } })
+                        @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Contact No", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.contact_no, new { htmlAttributes = new { @class = "form-control", @id = "contact_no" } })
+                        @Html.ValidationMessageFor(model => model.contact_no, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @id = "email" } })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Date Of Birth", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.date_of_birth, new { htmlAttributes = new { @class = "form-control", @id = "date_of_birth" } })
+                        @Html.ValidationMessageFor(model => model.date_of_birth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Birth Place", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.birth_place, new { htmlAttributes = new { @class = "form-control", @id = "birth_place" } })
+                        @Html.ValidationMessageFor(model => model.birth_place, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Occupation", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.occupation, new { htmlAttributes = new { @class = "form-control", @id = "occupation" } })
+                        @Html.ValidationMessageFor(model => model.occupation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Credit Limit", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.credit_limit, new { htmlAttributes = new { @class = "form-control number", @id = "credit_limit" } })
+                        @Html.ValidationMessageFor(model => model.credit_limit, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Annual Income", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.annual_income, new { htmlAttributes = new { @class = "form-control number", @id = "annual_income" } })
+                        @Html.ValidationMessageFor(model => model.annual_income, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+           }
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-8">
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-sm btn-success btn-block pull-right" onclick="AjaxSave()">Save</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-sm btn-danger btn-block pull-right" onclick="Cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/Functions/Customer/initialize.js")
+@Scripts.Render("~/Scripts/Functions/Customer/datetimepicker.js")
+@Scripts.Render("~/Scripts/Functions/Customer/functions.js")
+@Scripts.Render("~/Scripts/Functions/Customer/save.js")

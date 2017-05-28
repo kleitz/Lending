@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Lending_System.Models;
 using System.Web.Security;
+using System.Data;
+using System.Net;
 
 namespace Lending_System.Controllers
 {
@@ -184,21 +186,53 @@ namespace Lending_System.Controllers
             }
         }
 
-
-        public ActionResult UpdateCustomer()
+        public ActionResult Details(int? id)
         {
-            if (Session["UserId"] != null)
+            try
             {
-                return View();
+                using (db_lendingEntities db = new db_lendingEntities())
+                {
+                    tbl_customer tbl_customer = db.tbl_customer.Find(id);
+
+                    if (Session["UserId"] != null)
+                    {
+                        return View(tbl_customer);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+                }
             }
-            else
+            catch (Exception)
             {
-                return RedirectToAction("Login", "Account");
+                throw;
             }
         }
-        public JsonResult UpdateCustomer(tbl_customer_validation model)
+        [HttpPost, ActionName("Update")]
+        public ActionResult Update(int? id)
         {
-            return Json("Success", JsonRequestBehavior.AllowGet);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var LoanUpdate = db.tbl_customer.Find(id);
+            if (TryUpdateModel(LoanUpdate, "",
+               new string[] { "customer_no", "date_registered", "firstname", "middlename", "lastname", "civil_status", "address", "contact_no", "email", "date_of_birth", "birth_place", "occupation", "credit_limit", "annual_income" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return Json("Success", JsonRequestBehavior.AllowGet);
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(LoanUpdate);
         }
 
     }

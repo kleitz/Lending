@@ -386,5 +386,28 @@ namespace Lending_System.Controllers
                 throw ex;
             }
         }
+        public ActionResult View(int? id)
+        {
+            try
+            {
+                using (db_lendingEntities db = new db_lendingEntities())
+                {
+                    tbl_payment tbl_payment = db.tbl_payment.Find(id);
+
+                    if (Session["UserId"] != null)
+                    {
+                        return View(tbl_payment);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

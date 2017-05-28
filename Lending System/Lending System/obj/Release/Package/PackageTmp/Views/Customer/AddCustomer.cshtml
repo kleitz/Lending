@@ -7,10 +7,7 @@
 <div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title" style="color:#ffffff"><strong>Customer Detail</strong></h3>
-            <div class="btn-danger pull-right" style="margin-top:-18px">
-                @Html.ActionLink("Back", "Index", "Customer", null, new { @class = "btn btn-xs ", @style = "font-family: Open Sans; color:#fff", @id = "back" })
-            </div>
+            <h3 class="panel-title" ><strong>Customer Detail</strong></h3>
         </div>
         <div class="panel-body">
             <form class="form-horizontal" id="myForm">
@@ -126,14 +123,25 @@
                             @Html.TextBoxFor(m => m.annual_income, new { @style = "text-align: right",  @type = "number", @required = "", @class = "form-control", @placeholder = "0,000.00" })
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <button type="button" class="btn btn-lg btn-success" onclick="AddCustomer()">Save</button>
-                        <button type="button" class="btn btn-lg btn-danger" onclick="Cancel()">Cancel</button>
-                    </div>
                 </div>
             </form>
         </div>
         <div class="panel-footer">
+            <div class="row">
+                <div class="col-lg-8">
+          
+                </div>
+                <div class="col-lg-4">
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-sm btn-success btn-block pull-right" onclick="AddCustomer()">Save</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-sm btn-danger btn-block pull-right" onclick="Cancel()">Cancel</button>   
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

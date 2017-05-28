@@ -99,6 +99,10 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Neodynamic.SDK.WebClientPrint, Version=3.0.2000.0, Culture=neutral, PublicKeyToken=93565f9c313b0a45, processorArchitecture=MSIL">
+      <HintPath>..\packages\Neodynamic.SDK.WebClientPrint.3.0.2017.123\lib\Neodynamic.SDK.WebClientPrint.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -635,6 +639,10 @@
     <Content Include="Scripts\Functions\Collections\modal.js" />
     <Content Include="Scripts\Functions\Collections\save.js" />
     <Content Include="Scripts\Functions\Collections\variables.js" />
+    <Content Include="Scripts\Functions\Customer\datetimepicker.js" />
+    <Content Include="Scripts\Functions\Customer\functions.js" />
+    <Content Include="Scripts\Functions\Customer\initialize.js" />
+    <Content Include="Scripts\Functions\Customer\save.js" />
     <Content Include="Scripts\Functions\EndDayTransaction\datetimepicker.js" />
     <Content Include="Scripts\Functions\EndDayTransaction\functions.js" />
     <Content Include="Scripts\Functions\EndDayTransaction\initialize.js" />
@@ -783,6 +791,7 @@
     <Content Include="Views\Collections\Create.cshtml" />
     <Content Include="Views\CashPullOut\Index.cshtml" />
     <Content Include="Views\EndDayTransaction\Index.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
