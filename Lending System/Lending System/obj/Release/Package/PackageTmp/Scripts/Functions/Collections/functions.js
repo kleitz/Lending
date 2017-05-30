@@ -4,6 +4,9 @@
     $('input.number').number(true, 2);
     $('span.number').number(true, 4);
 
+    if (RootUrl == "/") {
+        RootUrl = ""
+    }
 });
 
 function ShowModalValidation() {
@@ -13,6 +16,7 @@ function ShowModalValidation() {
     setTimeout(function () {
     }, 300);
 };
+
 function ShowModalPayment() {
     if ($('#btn-payment').val() == "Proceed to payment") {
         $('#ModalPayment').modal('show');
@@ -45,7 +49,7 @@ function ProceedModalPayment() {
 
 function PrepareSave() {
     var payment = 0;
-    payment = $('#txtpayment_modal').val();
+    payment = parseFloat($('#txtpayment_modal').val());
     var rowText;
 
     $('#btn-payment').val("Save");
@@ -54,7 +58,7 @@ function PrepareSave() {
     //Interest
     var interestpayment = 0;
     var totalRowCount = $("#interest-payment-table tr").length;
-
+  
     for (var i = 1; i < totalRowCount; i++) {
         rowText = document.getElementById("interest-payment-table").rows[i].cells[0].innerText;
 
@@ -76,7 +80,8 @@ function PrepareSave() {
             }
         }
     }
-    $('#txt_interest_payment').val(interestpayment);
+    
+    $('#txt_interest_payment').val(parseFloat(interestpayment));
 
 
     //Principal
@@ -104,7 +109,7 @@ function PrepareSave() {
             }
         }
     }
-    $('#txtprincipal_payment').val(principalpayment);
+    $('#txtprincipal_payment').val(parseFloat(principalpayment));
 
     $('#txttotal_payment').val(parseFloat(principalpayment) + parseFloat(interestpayment));
 }
@@ -128,7 +133,7 @@ var getReferenceNo =
     {
         InitializeEvents: function () {
             $.ajax({
-                url: RootUrl + "Collections/getReferenceNo",
+                url: RootUrl + "/Collections/getReferenceNo",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) { $('#txtreference_no').val(response) },

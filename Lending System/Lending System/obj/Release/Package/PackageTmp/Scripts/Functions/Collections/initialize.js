@@ -2,4 +2,6 @@
     if (RootUrl == "/") {
         RootUrl = ""
     }
+
+    LoanPrincipalDueViewing.InitializeEvents()
 });

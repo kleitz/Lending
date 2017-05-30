@@ -1,0 +1,67 @@
+﻿@model Lending_System.Models.tbl_payment_details
+<style>
+
+    table th { /* new style */
+        border-top: double #000000;
+        border-bottom: 1px dashed #000000;
+    }
+    table td { /* new style */
+        width: 100px;
+        word-wrap: break-word;
+    }
+</style>
+<div style="font-family:Consolas; font-size:12px;">
+    <h5 style="text-align:center">RGL LENDING</h5>
+    <h5 style="text-align:center">Maa, Davao City</h5>
+    <br>
+
+    <h5 style="text-align:left">Receipt No: @ViewBag.receiptno</h5>
+    <h5 style="text-align:left" id="receipt_date">Date: @ViewBag.receiptdate</h5>
+    <div>
+        <text></text>
+        <h5 style="text-align:left">Borrower: @ViewBag.borrower</h5>
+        <h5 style="text-align:left">ID No: @ViewBag.borrower_id</h5>
+    </div>
+    @*<div>
+        <text>=============================</text>
+    </div>*@
+    <div class="table-responsive">
+        <table id="receipt-details" class="table" style="font-family:Consolas; font-size:12px;">
+            <tr>
+                <th style="text-align:left">REFERENCE</th>
+                <th style="text-align:center">PARTICULARS</th>
+                <th style="text-align:right">AMOUNT</th>
+            </tr>
+            @foreach (var item in ViewBag.receiptdetailslist)
+            {
+                <tr>
+                    <td>@item.reference_no</td>
+                    <td >@item.particulars</td>
+                    <td style="text-align:right">@item.amount</td>
+                </tr>
+            }
+            <tr>
+                <td>Total Amount Paid</td>
+                <td></td>
+                <td style="text-align:right"><b>@ViewBag.total_amount_paid</b></td>
+            </tr>        
+        </table>
+    </div>
+    <div>
+        <text>=============================</text>
+    </div>
+    <h5 style="text-align:left">Balance: </h5>
+    <div class="table-responsive">
+        <table id="receipt-details-balance" class="table" style="font-family:Consolas; font-size:12px;">
+
+            @foreach (var item2 in ViewBag.receiptdetailsbalancelist)
+            {
+                <tr>
+                    <td>@item2.loan_no</td>
+                    <td style="text-align:right">@item2.balance</td>
+                </tr>
+            }
+        </table>
+    </div> 
+    <h5 style="text-align:left">Cashier: @Session["UserFullName"]</h5>
+</div>

@@ -386,7 +386,8 @@ namespace Lending_System.Controllers
                 throw ex;
             }
         }
-        public ActionResult View(int? id)
+        //VIEWING
+        public ActionResult Details(int? id)
         {
             try
             {
@@ -407,6 +408,171 @@ namespace Lending_System.Controllers
             catch (Exception)
             {
                 throw;
+            }
+        }
+        public JsonResult ViewPrincipalDues(string id)
+        {
+            db_lendingEntities db = new db_lendingEntities();
+            try
+            {
+                if (Session["UserId"] != null)
+                {
+                    var result = from d in db.tbl_payment_details where d.reference_no == id && d.payment_type == "OR Payment" orderby d.loan_no, d.payment_type ascending select d;
+
+                    return Json(new { data = result }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public JsonResult ViewInterestDues(String id)
+        {
+            db_lendingEntities db = new db_lendingEntities();
+            try
+            {
+                if (Session["UserId"] != null)
+                {
+                    var result = from d in db.tbl_payment_details where d.reference_no == id && d.payment_type == "OR Payment Interest" orderby d.loan_no, d.payment_type ascending select d;
+
+                    return Json(new { data = result }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public JsonResult LoadRePrint(String id)
+        {
+            db_lendingEntities db = new db_lendingEntities();
+            try
+            {
+                if (Session["UserId"] != null)
+                {
+                    List<tbl_payment_details> list = new List<tbl_payment_details>();
+                    var result = from d in db.tbl_payment_details where d.reference_no == id orderby d.loan_no, d.payment_type ascending select d;
+
+                    foreach (var dt in result)
+                    {
+                        list.Add(new tbl_payment_details { reference_no = dt.reference_no, loan_name = dt.loan_name, amount = dt.amount});
+                    }
+
+                    var data = list.ToList();
+                    return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult Print(String id)
+        {
+
+            try
+            {
+                if (Session["UserId"] != null)
+                {
+                    db_lendingEntities db = new db_lendingEntities();
+                    List<receiptlist> list = new List<receiptlist>();
+
+                    ViewBag.receiptno = id.ToString().PadLeft(5, '0'); ;
+                    ViewBag.receiptdate = DateTime.Now.ToString("MM/dd/yyyy");
+
+                    decimal total_amount_paid = 0;
+                    var result = from d in db.tbl_payment_details where d.reference_no == id  orderby d.loan_no, d.payment_type ascending select d;
+
+                    foreach (var dt in result)
+                    {
+                        if (ViewBag.borrower == "" || ViewBag.borrower == null)
+                        {
+                            ViewBag.borrower = GetBorrower(id);
+                        }
+                        if (ViewBag.borrower_id == "" || ViewBag.borrower_id == null)
+                        {
+                            ViewBag.borrower_id = GetBorrowerid(id);
+                        }                           
+                        if (dt.payment_type == "OR Payment")
+                        {
+                            list.Add(new receiptlist { reference_no = dt.loan_no, particulars = "Principal", amount = String.Format("{0:0.00}", dt.amount) });
+                        }
+                        else
+                        {
+                            list.Add(new receiptlist { reference_no = dt.loan_no, particulars = "Interest", amount = String.Format("{0:0.00}", dt.amount) });
+                        }
+
+                        total_amount_paid = total_amount_paid + (decimal)dt.amount;
+                    }
+                    ViewBag.total_amount_paid = String.Format("{0:0.00}", total_amount_paid);
+                    ViewBag.receiptdetailslist = list;
+
+                    List<receiptbalancelist> list2 = new List<receiptbalancelist>();
+
+                    int customerid = Convert.ToInt32(GetBorrowerid(id));
+
+                    var result2 = from d in db.tbl_loan_processing where d.customer_id == customerid select d.loan_no;
+
+                    foreach (var dt2 in result2)
+                    {
+                        if (GetBalance(dt2) > 0){
+                            list2.Add(new receiptbalancelist { loan_no = dt2, balance = String.Format("{0:0.00}", GetBalance(dt2)) });
+                        }                
+                    }
+
+                    ViewBag.receiptdetailsbalancelist = list2;
+
+                    return PartialView("Print");
+                }
+                else
+                {
+                    return RedirectToAction("Login", "Account");
+                }          
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string GetBorrower(string id)
+        {
+
+            db_lendingEntities db = new db_lendingEntities();
+            {
+                var borrower = "";
+                var result = from d in db.tbl_payment where d.reference_no.Equals(id) select d.payor_name;
+                foreach (var data in result)
+                {
+                    borrower =  data;
+                }
+                return borrower;
+            }
+        }
+        public string GetBorrowerid(string id)
+        {
+
+            db_lendingEntities db = new db_lendingEntities();
+            {
+                var borrowerid = "";
+                var result = from d in db.tbl_payment where d.reference_no.Equals(id) select d.payor_id;
+                foreach (var data in result)
+                {
+                    borrowerid = data.ToString();
+                }
+                return borrowerid;
             }
         }
     }

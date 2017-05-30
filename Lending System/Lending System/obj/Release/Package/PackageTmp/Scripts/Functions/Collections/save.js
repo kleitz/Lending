@@ -14,7 +14,7 @@ function AjaxSave() {
     };
 
     $.ajax({
-        url: RootUrl + "Collections/SavePayment",
+        url: RootUrl + "/Collections/SavePayment",
         type: "POST",
         data: JSON.stringify(myObj),
         contentType: 'application/json',
@@ -23,7 +23,7 @@ function AjaxSave() {
         complete: function (data) {
             $.when(AjaxSaveDetailsInterest().done(AjaxSaveDetailsPrincipal().done(AjaxSaveLedger()))).then(
               toastr.success('Successfully saved.', 'Save')
-            ).done(window.location.href = RootUrl + "Collections/Index");
+            ).done(LoadReceipt());
         }
     });
 
@@ -67,7 +67,7 @@ function AjaxSaveDetailsInterest() {
                     "date_created": ""
                 };
                 $.ajax({
-                    url: RootUrl + "Collections/SavePaymentDetails",
+                    url: RootUrl + "/Collections/SavePaymentDetails",
                     type: "POST",
                     data: JSON.stringify(myObj),
                     contentType: 'application/json',
@@ -116,7 +116,7 @@ function AjaxSaveDetailsPrincipal() {
                     "date_created": ""
                 };
                 $.ajax({
-                    url: RootUrl + "Collections/SavePaymentDetails",
+                    url: RootUrl + "/Collections/SavePaymentDetails",
                     type: "POST",
                     data: JSON.stringify(myObj),
                     contentType: 'application/json',
@@ -211,7 +211,7 @@ function AjaxSaveToLedger() {
     for (var i = 1; i < totalRowCount1; i++) {
 
         rowText1 = document.getElementById("interest-payment-table").rows[i].cells[0].innerText;
-        debugger
+        
         if (rowText1 == "No data available in table") {
             interest_payment = 0;
 
@@ -304,7 +304,7 @@ function AjaxSaveLedgerDetail(trans_type, reference_no, loan_id, loan_name, inte
     };
 
     $.ajax({
-        url: RootUrl + "Collections/SaveLedger",
+        url: RootUrl + "/Collections/SaveLedger",
         type: "POST",
         data: JSON.stringify(myObj),
         contentType: 'application/json',

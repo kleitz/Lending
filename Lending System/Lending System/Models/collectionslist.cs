@@ -14,5 +14,6 @@ namespace Lending_System.Models
         public Nullable<decimal> payment { get; set; }
         public Nullable<decimal> interest { get; set; }
         public string interest_type { get; set; }
+        public string is_additional_interest { get; set; }
     }
 }
