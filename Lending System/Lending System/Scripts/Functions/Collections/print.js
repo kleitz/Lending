@@ -44,7 +44,7 @@ function showPrintDialog(div_id) {
     map_src.focus();
     map_src.print();
     setTimeout(function () { map_src.close(); }, 300);
-
+    setTimeout(function () { window.location.href = RootUrl + "/Collections/Index"; }, 300);
     //window.location.href = RootUrl + "/Collections/Index";
 }
 
