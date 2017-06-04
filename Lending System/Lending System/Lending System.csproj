@@ -797,6 +797,7 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Collections\Details.cshtml" />
     <Content Include="Views\Collections\Print.cshtml" />
+    <Content Include="Views\EndDayTransaction\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

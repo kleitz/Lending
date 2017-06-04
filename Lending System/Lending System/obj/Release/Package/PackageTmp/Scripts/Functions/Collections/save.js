@@ -147,8 +147,6 @@ function AjaxSaveLedger() {
 
     var found = false;
 
-    debugger
-
     for (var i = 1; i < totalRowCountP; i++) {
         rowTextP = document.getElementById("principal-payment-table").rows[i].cells[0].innerText;
         principal_payment = 0;

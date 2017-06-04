@@ -137,15 +137,15 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <label>Principal Payment</label>
-                                    <input id="txtprincipal_payment" min = "0" onkeyup = "" class="form-control number" readonly>    
+                                    <input id="txtprincipal_payment" min = "0.00" onkeyup = "" class="form-control number" readonly>    
                                 </div>
                                 <div class="col-md-4">
                                     <label>Interest Payment</label>
-                                    <input id="txt_interest_payment" min = "0" onkeyup = "" class="form-control number" readonly>
+                                    <input id="txt_interest_payment" min = "0.00" onkeyup = "" class="form-control number" readonly>
                                 </div>
                                 <div class="col-md-4">
                                     <label>Total Payment</label>
-                                    <input id="txttotal_payment" min = "0" onkeyup = "" class="form-control number" readonly>
+                                    <input id="txttotal_payment" min = "0.00" onkeyup = "" class="form-control number" readonly>
                                 </div>
                             </div>
                         </div>
@@ -225,9 +225,9 @@
                     <form id="payment-form">
                         <div class="modal-body">
                             <div id="text-validation-msg">Amount Due</div>
-                            <input type = "text" id="txtamount_due_modal" min = "0" onkeyup = "" style="text-align:right" class="form-control input-lg number" readonly>
+                            <input type = "text" id="txtamount_due_modal" min = "0" style="text-align:right" class="form-control input-lg number" readonly>
                             <div id="text-validation-msg">Payment</div>
-                            <input type = "text" id="txtpayment_modal" min = "0" onkeyup = "" style="text-align:right" class="form-control input-lg number" autofocus>
+                            <input type = "number" step="0.01" min = "0" id="txtpayment_modal" style="text-align:right" class="form-control input-lg" autofocus>
                         </div>
                         <div class="modal-footer">
                             <div class="row">
@@ -259,7 +259,7 @@
                     </button>
                     <h3 class="modal-title" style="text-align:center">Official Receipt</h3>
                 </div>
-                <div id="div-forms">
+                <div>
                     <form id="receipt-form">
                         <div class="col-md-12">
                             <div class="modal-body" id="receipt">

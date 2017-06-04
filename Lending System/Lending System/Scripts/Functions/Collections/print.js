@@ -6,17 +6,19 @@
 };
 
 function HideModalPrint() {
+
     $('#ModalPrint').modal('hide');
+    window.location.href = RootUrl + "/Collections/Index";
 
     setTimeout(function () {
     }, 300);
 }
 
-function Print(div_id) {
+function Print(divId) {
     $('#ModalPrint').modal('hide');
 
     setTimeout(function () {
-        showPrintDialog(div_id);
+        showPrintDialog(divId);
     }, 500);
 
 }
@@ -36,14 +38,14 @@ function showPrintDialog(div_id) {
     //window.location.href = RootUrl + "/Collections/Index";
 
     var content = document.getElementById(div_id);
-    var map_src = window.open("", "PRINT MAP", "width=200,top=0,left=0,toolbar=no,scrollbars=no,status=no,resizable=no");
-    map_src.document.write('<html><head>');
-    map_src.document.write(content.innerHTML);
-    map_src.document.write('</div></body></html>');
-    map_src.document.close();
-    map_src.focus();
-    map_src.print();
-    setTimeout(function () { map_src.close(); }, 300);
+    var mapSrc = window.open("", "PRINT MAP", "width=200,top=0,left=0,toolbar=no,scrollbars=no,status=no,resizable=no");
+    mapSrc.document.write('<html><head>');
+    mapSrc.document.write(content.innerHTML);
+    mapSrc.document.write('</div></body></html>');
+    mapSrc.document.close();
+    mapSrc.focus();
+    mapSrc.print();
+    setTimeout(function () { mapSrc.close(); }, 300);
     setTimeout(function () { window.location.href = RootUrl + "/Collections/Index"; }, 300);
     //window.location.href = RootUrl + "/Collections/Index";
 }

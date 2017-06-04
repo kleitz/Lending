@@ -14,6 +14,7 @@ namespace Lending_System.Controllers
     public class CollectionsController : Controller
     {
         db_lendingEntities db = new db_lendingEntities();
+        DateTime _serverDateTime = DateTime.Now;
 
         // GET: Collections
         public ActionResult Index()
@@ -135,6 +136,8 @@ namespace Lending_System.Controllers
                     loan_granted = (decimal)dt.loan_granted;
                     interest = loan_granted * (interest_rate / 100);
 
+                    total_balance = decimal.Round((decimal)total_balance, 2, MidpointRounding.AwayFromZero);
+
                     if (interest_type == "1")
                     {
                         total_balance = total_balance - interest;
@@ -154,6 +157,79 @@ namespace Lending_System.Controllers
                 return Json("Failed", JsonRequestBehavior.AllowGet);
             }
         }
+
+        public JsonResult GenerateInterest(long? id)
+        {
+            using (db = new db_lendingEntities())
+            {
+                var result =
+                    from d in db.tbl_loan_processing
+                    where d.customer_id == id
+                          && d.status == "Released"
+                          && d.due_date < _serverDateTime
+                    orderby d.loantype_id ascending
+                    select d;
+                foreach (var dt in result)
+                {
+                    var balance = (decimal)GetLedgerBalance(dt.loan_no);
+
+                    if (balance > 0)
+                    {
+                        var interestRate = (decimal)dt.loan_interest_rate;
+                        var noOfDays = 0;
+                        var dateStart = GetInterestStartDate(dt.loan_no);
+
+                        if (GetInterestType(dt.loan_name) == "1")
+                        {
+                            noOfDays = decimal.ToInt32((_serverDateTime - dateStart).Value.Days) ;
+                        }
+                        else
+                        {
+                            if ((decimal.ToInt32((_serverDateTime - dateStart).Value.Days)) >= 30)
+                            {
+                                noOfDays = (((_serverDateTime - dateStart).Value.Days)) / 30;
+                            }
+                        }
+                        decimal totalInterest = 0;
+                        for (var c = 0; c < noOfDays; c++)
+                        {
+                            var interest = (balance * (interestRate / 100));
+                            balance = balance + interest;
+                            totalInterest = totalInterest + interest;
+                        }
+
+                        db_lendingEntities dbSave = new db_lendingEntities();
+                        tbl_loan_ledger tbl = new tbl_loan_ledger();
+
+                        tbl.date_trans = _serverDateTime;
+                        tbl.trans_type = "Late Payment Interest";
+                        tbl.reference_no = "";
+                        tbl.loan_no = dt.loan_no;
+                        tbl.loan_type_name = dt.loan_name;
+                        tbl.customer_id = dt.customer_id;
+                        tbl.customer_name = dt.customer_name;
+                        tbl.interest_type = GetInterestType(dt.loan_no);
+                        tbl.interest_rate = dt.loan_interest_rate;
+                        tbl.interest = totalInterest;
+                        tbl.amount_paid = 0;
+                        tbl.principal = 0;
+                        tbl.balance = 0;
+                        tbl.date_created = DateTime.Now;
+                        tbl.created_by = Session["UserName"].ToString();
+
+                        dbSave.tbl_loan_ledger.Add(tbl);
+
+                        dbSave.SaveChanges();
+                    }                    
+                }
+            }
+
+            return Json("Success", JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult LoadInterest()
+        {
+            return Json("Success", JsonRequestBehavior.AllowGet);
+        }
         public JsonResult LoadInterestDues(long? id)
         {
             db_lendingEntities db = new db_lendingEntities();
@@ -163,63 +239,27 @@ namespace Lending_System.Controllers
 
             if (Session["UserId"] != null)
             {
-                decimal balance = 0;
-                decimal payments = 0;
-                decimal total_balance = 0;
-                decimal loan_granted = 0;
-                decimal interest_rate = 0;        
-                decimal interest = 0;
-                decimal interest_balance = 0;
-
+                GenerateInterest(id);
                 List<collectionslist> collectionslist = new List<collectionslist>();
                 collectionslist collection = new collectionslist();
 
                 var result = from d in db.tbl_loan_processing where d.customer_id == id && d.status == "Released" orderby d.date_created select d;
                 foreach (var dt in result)
                 {
-                    balance = GetBalance(dt.loan_no);
-                    payments = GetPaymentsInterest(dt.loan_no);
-                    total_balance = balance - payments;
-
-                    interest_rate = (decimal)dt.loan_interest_rate;
-                    loan_granted = (decimal)dt.loan_granted;
-                    interest = loan_granted * (interest_rate / 100);
-                    interest_balance = interest - payments;
-
-                    var interest_type = GetInterestType(dt.loan_name);
-
-                    DateTime now = DateTime.Now;
-
-                    if (now > dt.due_date)
+                    var initialInterest = dt.loan_granted * (dt.loan_interest_rate / 100);
+                    decimal? interestBalance = 0;
+                    if (GetInterestType(dt.loan_name) == "1")
                     {
-                        if (total_balance > 0)
-                        {
-                            if (interest_balance > 0)
-                            {
-                                collectionslist.Add(new collectionslist { loan_no = dt.loan_no, loan_type = dt.loan_name, due_date = dt.due_date, amount_due = interest_balance, payment = 0, interest = dt.loan_interest_rate, interest_type = GetInterestType(dt.loan_name) });
-                                collectionslist.Add(new collectionslist { loan_no = dt.loan_no, loan_type = dt.loan_name, due_date = dt.due_date, amount_due = interest, payment = 0, interest = dt.loan_interest_rate, interest_type = GetInterestType(dt.loan_name) });
-                            }
-                            else
-                            {
-                                collectionslist.Add(new collectionslist { loan_no = dt.loan_no, loan_type = dt.loan_name, due_date = dt.due_date, amount_due = interest, payment = 0, interest = dt.loan_interest_rate, interest_type = GetInterestType(dt.loan_name) });
-                            }
-
-                        }
+                         interestBalance = GetLedgerInterestBalance(dt.loan_no, initialInterest);
                     }
                     else
                     {
-                        if (interest_type == "1")
-                        {
-                            if (interest_balance > 0)
-                            {
-                                collectionslist.Add(new collectionslist { loan_no = dt.loan_no, loan_type = dt.loan_name, due_date = dt.due_date, amount_due = interest_balance, payment = 0, interest = dt.loan_interest_rate, interest_type = GetInterestType(dt.loan_name) });
-                            }
-                        }
-                        else
-                        {
-
-                        }
+                         interestBalance = GetLedgerInterestBalance(dt.loan_no, 0);
                     }
+
+                    interestBalance = decimal.Round((decimal)interestBalance, 2, MidpointRounding.AwayFromZero);
+
+                    collectionslist.Add(new collectionslist { loan_no = dt.loan_no, loan_type = dt.loan_name, due_date = dt.due_date, amount_due = interestBalance, payment = 0, interest = dt.loan_interest_rate, interest_type = GetInterestType(dt.loan_name) });
                 }
 
                 var data = collectionslist.ToList();
@@ -245,6 +285,151 @@ namespace Lending_System.Controllers
                 return balance;
             }           
         }
+        public decimal? GetLedgerBalance(string id)
+        {
+            using(db = new db_lendingEntities())
+            {
+                var found = false;
+                decimal? balance = 0;
+                var result = 
+                    from d in db.tbl_loan_ledger
+                    where d.loan_no.Equals(id)
+                    select d;
+
+                foreach (var data in result)
+                {
+                    switch (data.trans_type)
+                    {
+                        case "Beginning Balance":
+                            balance = data.balance;
+                            break;
+                        case "Late Payment Interest":
+                            balance = balance + data.interest;
+                            break;
+                        case "OR Payment":
+                            balance = balance - data.amount_paid;
+                            break;
+                        case "OR Payment Interest":
+                            balance = balance - data.interest;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (data.date_trans.Value.Day == _serverDateTime.Day && data.date_trans.Value.DayOfYear == _serverDateTime.DayOfYear)
+                    {
+                        found = true;
+                    }
+                }
+                if (found)
+                {
+                    balance = 0;
+                    return balance;
+                }
+                else
+                {
+                    return balance;
+                }
+            }
+        }
+
+        public DateTime? GetInterestStartDate(string id)
+        {
+            using (db = new db_lendingEntities())
+            {
+                DateTime? dateStart = null;
+                var result =
+                    from d in db.tbl_loan_ledger
+                    where d.loan_no.Equals(id)
+                    select d;
+
+                foreach (var data in result)
+                {
+                    switch (data.trans_type)
+                    {
+                        case "Beginning Balance":
+                            if (data.interest_type == "1")
+                            {
+                                dateStart = data.date_trans.Value.AddDays(1);
+                            }
+                            else if (data.interest_type == "2")
+                            {
+                                dateStart = data.date_trans.Value.AddDays(30);
+                            }                     
+                            break;
+                        case "Late Payment Interest":
+                            dateStart = data.date_trans;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return dateStart;
+            }
+        }
+        public decimal? DisplayLedgerBalance(string id)
+        {
+
+            using (db = new db_lendingEntities())
+            {
+                decimal? balance = 0;
+                var result =
+                    from d in db.tbl_loan_ledger
+                    where d.loan_no.Equals(id)
+                    select d;
+
+                foreach (var data in result)
+                {
+                    switch (data.trans_type)
+                    {
+                        case "Beginning Balance":
+                            balance = data.balance;
+                            break;
+                        case "Late Payment Interest":
+                            balance = balance + data.interest;
+                            break;
+                        case "OR Payment":
+                            balance = balance - data.amount_paid;
+                            break;
+                        case "OR Payment Interest":
+                            balance = balance - data.interest;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                return balance;
+          
+            }
+        }
+        public decimal? GetLedgerInterestBalance(string id, decimal? initialInterest)
+        {
+            using (db = new db_lendingEntities())
+            {
+                decimal? interest = initialInterest;
+                var result =
+                    from d in db.tbl_loan_ledger
+                    where d.loan_no.Equals(id)
+                    select d;
+                foreach (var data in result)
+                {
+                    switch (data.trans_type)
+                    {
+                        case "Late Payment Interest":
+                            interest = interest + data.interest;
+                            break;
+                        case "OR Payment":
+                            interest = interest - data.interest;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return interest;
+            }
+        }
+    
         public decimal GetPayments(string id)
         {
 
@@ -529,7 +714,7 @@ namespace Lending_System.Controllers
                     foreach (var dt2 in result2)
                     {
                         if (GetBalance(dt2) > 0){
-                            list2.Add(new receiptbalancelist { loan_no = dt2, balance = String.Format("{0:0.00}", GetBalance(dt2)) });
+                            list2.Add(new receiptbalancelist { loan_no = dt2, balance = String.Format("{0:0.00}", DisplayLedgerBalance(dt2)) });
                         }                
                     }
 

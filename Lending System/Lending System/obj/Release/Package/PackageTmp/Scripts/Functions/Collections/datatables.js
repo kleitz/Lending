@@ -11,6 +11,10 @@
                         "type": "GET",
                         "datatype": "json",
                     },
+                    "language": {
+                        "decimal": ",",
+                        "thousands": "."
+                    },
                     "columns": [
                             { "data": "loan_no", "className": "dt-left" },
                             { "data": "loan_type", "className": "dt-left" },
@@ -23,10 +27,10 @@
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                            { "data": "amount_due", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                            { "data": "payment", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
+                            { "data": "amount_due", "className": "dt-right" },
+                            { "data": "payment", "className": "dt-right" },
                             { "data": "interest_type", "className": "hide" },
-                            { "data": "interest", "className": "hide" },
+                            { "data": "interest", "className": "hide" }
                     ],
                 });
             }
@@ -44,6 +48,10 @@ var LoanInterestDue =
                         "type": "GET",
                         "datatype": "json",
                     },
+                    "language": {
+                        "decimal": ",",
+                        "thousands": "."
+                    },
                     "columns": [
                             { "data": "loan_no", "className": "dt-left" },
                             { "data": "loan_type", "className": "dt-left" },
@@ -56,11 +64,11 @@ var LoanInterestDue =
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                            { "data": "amount_due", "className": "dt-body-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                            { "data": "payment", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
+                        { "data": "amount_due", "className": "dt-right" },
+                            { "data": "payment", "className": "dt-right" },
                             { "data": "interest_type", "className": "hide" },
-                            { "data": "interest", "className": "hide" },
-                    ],
+                            { "data": "interest", "className": "hide" }
+                    ]
                 });
             }
         }
@@ -72,9 +80,9 @@ function Balance() {
     balance1 = DuePrincipal();
     balance2 = DueInterest();
 
-    balance = Number(balance1) + Number(balance2)
+    balance = Number(balance1) + Number(balance2);
 
-    $("#txtamount_due_modal").val(balance);
+    $("#txtamount_due_modal").val(balance.toFixed(2));
 }
 
 function DuePrincipal() {
@@ -127,6 +135,10 @@ var LoanPrincipalDueViewing =
                         "type": "GET",
                         "datatype": "json",
                     },
+                    "language": {
+                        "decimal": ",",
+                        "thousands": "."
+                    },
                     "columns": [
                             { "data": "loan_no", "className": "dt-left" },
                             { "data": "loan_name", "className": "dt-left" },
@@ -139,7 +151,7 @@ var LoanPrincipalDueViewing =
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                            { "data": "amount", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0.00, '') },
+                            { "data": "amount", "className": "dt-right" }
                     ],
                     "fnInitComplete": function (oSettings, json) {
                         $.when(LoanInterestDueViewing.InitializeEvents());
@@ -162,6 +174,10 @@ var LoanInterestDueViewing =
                         "type": "GET",
                         "datatype": "json",
                     },
+                    "language": {
+                        "decimal": ",",
+                        "thousands": "."
+                    },
                     "columns": [
                             { "data": "loan_no", "className": "dt-left" },
                             { "data": "loan_name", "className": "dt-left" },
@@ -174,7 +190,7 @@ var LoanInterestDueViewing =
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                            { "data": "amount", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0.00, '') },
+                            { "data": "amount", "className": "dt-right" }
                     ],
                     "fnInitComplete": function (oSettings, json) {
                         ComputeTotals();
@@ -187,7 +203,7 @@ var LoanInterestDueViewing =
         }
 
 function LoadReceipt() {
-    debugger
+    
     var url = RootUrl + "/Collections/Print?id=" + $('#txtreference_no').val();
     var encodedParam = encodeURIComponent(url);
 

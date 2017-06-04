@@ -21,6 +21,10 @@ function LoadLedger(id) {
             "type": "GET",
             "datatype": "json"
         },
+        "language": {
+            "decimal": ",",
+            "thousands": "."
+        },
         "columns": [
                 { "data": "autonum", "className": "hide" },
                 {
@@ -33,10 +37,10 @@ function LoadLedger(id) {
                     }
                 },
                 { "data": "reference_no", "className": "dt-left"},
-                { "data": "amount_paid", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                { "data": "principal", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                { "data": "interest", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                { "data": "balance", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
+                { "data": "amount_paid", "className": "dt-right"},
+                { "data": "principal", "className": "dt-right" },
+                { "data": "interest", "className": "dt-right" },
+                { "data": "balance", "className": "dt-right" },
         ]
     });
 }

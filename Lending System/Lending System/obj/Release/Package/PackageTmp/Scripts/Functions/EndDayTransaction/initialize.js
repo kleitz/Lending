@@ -35,8 +35,12 @@ var List =
                         { "data": "cash_collected", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
                         { "data": "cash_pulled_out", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
                         { "data": "cash_end", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                ],
-
+                        {
+                            "render": function (data, type, row) {
+                                return '<a href="' + RootUrl + '/EndDayTransaction/Print?id=' + row.autonum + '"><span title="Details">View</span></a>'
+                            }
+                        }
+                ]
             });
-        },
+        }
     }

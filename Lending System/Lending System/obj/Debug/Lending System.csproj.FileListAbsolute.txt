@@ -280,7 +280,7 @@ D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.Raz
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.WebPages.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.WebPages.Deployment.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.WebPages.Razor.xml
-D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.csprojResolveAssemblyReference.cache
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.pdb
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\Neodynamic.SDK.WebClientPrint.dll
+D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.csprojResolveAssemblyReference.cache

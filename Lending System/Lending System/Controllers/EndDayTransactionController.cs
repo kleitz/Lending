@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Routing.Constraints;
 
 namespace Lending_System.Controllers
 {
@@ -200,6 +201,11 @@ namespace Lending_System.Controllers
                 return Json("Failed", JsonRequestBehavior.DenyGet);
                 throw ex;
             }       
+        }
+
+        public ActionResult Print(int? id)
+        {
+            return View();
         }
     }
 }
