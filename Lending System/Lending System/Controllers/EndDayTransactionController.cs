@@ -205,7 +205,51 @@ namespace Lending_System.Controllers
 
         public ActionResult Print(int? id)
         {
-            return View();
+            try
+            {
+                using (db_lendingEntities db = new db_lendingEntities())
+                {
+                    tbl_end_of_day_transactions tbl_end_of_day_transactions = db.tbl_end_of_day_transactions.Find(id);
+
+                    if (Session["UserId"] != null)
+                    {
+                        return View(tbl_end_of_day_transactions);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult PrintDetails(int? id)
+        {
+            using (db_lendingEntities db = new db_lendingEntities())
+            {
+                tbl_end_of_day_transactions tbl = db.tbl_end_of_day_transactions.Find(id);
+                DateTime? date = null;
+                if (tbl != null)
+                {
+                    ViewBag.CashBeginning = decimal.Round((decimal)tbl.cash_begin, 2, MidpointRounding.AwayFromZero);
+                    ViewBag.CashCollection = decimal.Round((decimal)tbl.cash_collected, 2, MidpointRounding.AwayFromZero);
+                    ViewBag.CashEnd = decimal.Round((decimal)tbl.cash_end, 2, MidpointRounding.AwayFromZero);
+                    ViewBag.CashRelease = decimal.Round((decimal)tbl.cash_release, 2, MidpointRounding.AwayFromZero);
+                    ViewBag.CashPullOut = decimal.Round((decimal)tbl.cash_pulled_out, 2, MidpointRounding.AwayFromZero);
+                    date = tbl.date_trans;
+                }
+
+                var result1 = db.tbl_loan_processing.Where(d => d.status == "Released" && (d.loan_date >= date && d.loan_date <= date)).ToList();
+                ViewBag.ReleaseList = result1;
+
+                var result2 = db.tbl_payment.Where(d => (d.date_trans >= date && d.date_trans <= date)).ToList();
+                ViewBag.CollectionList = result2;
+            }
+
+            return PartialView("PrintDetails");
         }
     }
 }

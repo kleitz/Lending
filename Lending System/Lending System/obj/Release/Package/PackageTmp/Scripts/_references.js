@@ -66,6 +66,7 @@
 /// <reference path="Functions/EndDayTransaction/functions.js" />
 /// <reference path="Functions/EndDayTransaction/initialize.js" />
 /// <reference path="Functions/EndDayTransaction/modal.js" />
+/// <reference path="functions/enddaytransaction/print.js" />
 /// <reference path="Functions/EndDayTransaction/save.js" />
 /// <reference path="Functions/EndDayTransaction/variables.js" />
 /// <reference path="Functions/Home/functions.js" />

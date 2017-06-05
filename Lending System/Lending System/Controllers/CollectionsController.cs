@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -367,36 +368,49 @@ namespace Lending_System.Controllers
                 return dateStart;
             }
         }
-        public decimal? DisplayLedgerBalance(string id)
+        public decimal? DisplayLedgerBalance(string id, string referenceNo)
         {
 
             using (db = new db_lendingEntities())
             {
                 decimal? balance = 0;
-                var result =
+                var result = 
                     from d in db.tbl_loan_ledger
-                    where d.loan_no.Equals(id)
+                    where d.loan_no.Equals(id)                
                     select d;
 
                 foreach (var data in result)
                 {
-                    switch (data.trans_type)
+                    int refNo = 0;
+                    try
                     {
-                        case "Beginning Balance":
-                            balance = data.balance;
-                            break;
-                        case "Late Payment Interest":
-                            balance = balance + data.interest;
-                            break;
-                        case "OR Payment":
-                            balance = balance - data.amount_paid;
-                            break;
-                        case "OR Payment Interest":
-                            balance = balance - data.interest;
-                            break;
-                        default:
-                            break;
+                         refNo = Int32.Parse(data.reference_no);
                     }
+                    catch (Exception )
+                    {
+                        refNo = 0;
+                    }               
+                    int crefNo = Int32.Parse(referenceNo);
+                    if (refNo <= crefNo)
+                    {
+                        switch (data.trans_type)
+                        {
+                            case "Beginning Balance":
+                                balance = data.balance;
+                                break;
+                            case "Late Payment Interest":
+                                balance = balance + data.interest;
+                                break;
+                            case "OR Payment":
+                                balance = balance - data.amount_paid;
+                                break;
+                            case "OR Payment Interest":
+                                balance = balance - data.interest;
+                                break;
+                            default:
+                                break;
+                        }
+                    }                
                 }
 
                 return balance;
@@ -705,16 +719,22 @@ namespace Lending_System.Controllers
                     ViewBag.total_amount_paid = String.Format("{0:0.00}", total_amount_paid);
                     ViewBag.receiptdetailslist = list;
 
+                    //DateTime? date = null;
+                    //var result1 = from d in db.tbl_payment where d.reference_no.Equals(id) select d;
+                    //foreach (var dt1 in result1)
+                    //{
+                    //    date = dt1.date_trans;
+                    //}
+
                     List<receiptbalancelist> list2 = new List<receiptbalancelist>();
 
                     int customerid = Convert.ToInt32(GetBorrowerid(id));
-
                     var result2 = from d in db.tbl_loan_processing where d.customer_id == customerid select d.loan_no;
 
                     foreach (var dt2 in result2)
                     {
-                        if (GetBalance(dt2) > 0){
-                            list2.Add(new receiptbalancelist { loan_no = dt2, balance = String.Format("{0:0.00}", DisplayLedgerBalance(dt2)) });
+                        if (DisplayLedgerBalance(dt2, id) > 0){
+                            list2.Add(new receiptbalancelist { loan_no = dt2, balance = String.Format("{0:0.00}", DisplayLedgerBalance(dt2, id)) });
                         }                
                     }
 

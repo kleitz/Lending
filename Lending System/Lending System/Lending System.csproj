@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="fonts\Helpers\MyHelpers.cs" />
     <Compile Include="Models\collectionslist.cs" />
+    <Compile Include="Models\dbContextModel.cs" />
     <Compile Include="Models\dbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +204,7 @@
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ledger.cs" />
+    <Compile Include="Models\LoanLedger.cs" />
     <Compile Include="Models\receiptbalancelist.cs" />
     <Compile Include="Models\receiptlist.cs" />
     <Compile Include="Models\tbl_amortization.cs">
@@ -650,6 +652,7 @@
     <Content Include="Scripts\Functions\EndDayTransaction\functions.js" />
     <Content Include="Scripts\Functions\EndDayTransaction\initialize.js" />
     <Content Include="Scripts\Functions\EndDayTransaction\modal.js" />
+    <Content Include="Scripts\Functions\EndDayTransaction\print.js" />
     <Content Include="Scripts\Functions\EndDayTransaction\save.js" />
     <Content Include="Scripts\Functions\EndDayTransaction\variables.js" />
     <Content Include="Scripts\Functions\Home\functions.js" />
@@ -798,9 +801,11 @@
     <Content Include="Views\Collections\Details.cshtml" />
     <Content Include="Views\Collections\Print.cshtml" />
     <Content Include="Views\EndDayTransaction\Print.cshtml" />
+    <Content Include="Views\EndDayTransaction\PrintDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

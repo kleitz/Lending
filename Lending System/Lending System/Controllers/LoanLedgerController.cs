@@ -75,7 +75,9 @@ namespace Lending_System.Controllers
                             {
                                 balance = balance - (decimal)dt.amount_paid;
                             }
-                         
+
+                            balance = decimal.Round((decimal)balance, 2, MidpointRounding.AwayFromZero);
+
                             ledger.Add(new ledger { autonum = dt.autonum, date_trans = dt.date_trans, trans_type = dt.trans_type, reference_no = dt.reference_no, loan_no = dt.loan_no, loan_type_name = dt.loan_type_name, customer_id = dt.customer_id, customer_name = dt.customer_name, interest_type = dt.interest_type, interest_rate = dt.interest_rate, interest = dt.interest, amount_paid = dt.amount_paid, principal = dt.principal, balance = balance });                     
                             counter = counter + 1;
                         }

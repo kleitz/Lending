@@ -6,4 +6,7 @@
   <parameter name="db_lendingEntities-Web.config Connection String" description="db_lendingEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.dbModel.csdl|res://*/Models.dbModel.ssdl|res://*/Models.dbModel.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;server=192.168.0.2;user id=root;password=lsi2010;persistsecurityinfo=True;database=db_lending&quot;" tags="SqlConnectionString">
     <parameterEntry kind="XmlFile" scope="D:\\MLGS\\Work\\Repository\\Lending\\Lending\ System\\Lending\ System\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='db_lendingEntities']/@connectionString" />
   </parameter>
+  <parameter name="Lending_System.Models.dbContextModel-Web.config Connection String" description="Lending_System.Models.dbContextModel Connection String used in web.config by the application to access the database." defaultValue="Lending_System.Models.dbContextModel_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\MLGS\\Work\\Repository\\Lending\\Lending\ System\\Lending\ System\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Lending_System.Models.dbContextModel']/@connectionString" />
+  </parameter>
 </parameters>

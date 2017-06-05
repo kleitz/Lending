@@ -1,8 +1,44 @@
-﻿
+﻿@model Lending_System.Models.tbl_end_of_day_transactions
 @{
     ViewBag.Title = "Print";
     Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
 }
 
-<h2>Print</h2>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validation")
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
 
+@Scripts.Render("~/Scripts/Datas/custom-common.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/select2.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/toastr.min.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/responsive.bootstrap.min.js")
+@Scripts.Render("~/Scripts/bootstrap-select.min.js")
+@Scripts.Render("~/Scripts/jquery.number.min.js")
+
+<div class="container" >
+    <div class="panel">
+        <div class="panel-heading">
+            @Html.HiddenFor(model => model.autonum, new { @id = "autonum" })
+        </div>
+        <div class="panel-body" id="report-body"></div>
+        <div class="panel-footer">
+            <div class="col-sm-6">
+
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger pull-right" onclick="Print('report-body')">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/Functions/EndDayTransaction/print.js")
