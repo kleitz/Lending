@@ -241,7 +241,7 @@ namespace Lending_System.Controllers
                     ViewBag.CashPullOut = decimal.Round((decimal)tbl.cash_pulled_out, 2, MidpointRounding.AwayFromZero);
                     date = tbl.date_trans;
                 }
-
+                ViewBag.dateString = String.Format("{0:MMMM dd, yyyy}", date);
                 var result1 = db.tbl_loan_processing.Where(d => d.status == "Released" && (d.loan_date >= date && d.loan_date <= date)).ToList();
                 ViewBag.ReleaseList = result1;
 

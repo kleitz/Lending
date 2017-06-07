@@ -181,6 +181,7 @@
     <Compile Include="Controllers\LoanLedgerController.cs" />
     <Compile Include="Controllers\LoanProcessingController.cs" />
     <Compile Include="Controllers\LoansController.cs" />
+    <Compile Include="Controllers\ReceivablesController.cs" />
     <Compile Include="Controllers\testController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -204,9 +205,9 @@
       <DependentUpon>dbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ledger.cs" />
-    <Compile Include="Models\LoanLedger.cs" />
     <Compile Include="Models\receiptbalancelist.cs" />
     <Compile Include="Models\receiptlist.cs" />
+    <Compile Include="Models\receivables.cs" />
     <Compile Include="Models\tbl_amortization.cs">
       <DependentUpon>dbModel.tt</DependentUpon>
     </Compile>
@@ -668,6 +669,12 @@
     <Content Include="Scripts\Functions\LoanProcessing\textbox-onchange.js" />
     <Content Include="Scripts\Functions\LoanProcessing\update-loan-status.js" />
     <Content Include="Scripts\Functions\LoanProcessing\variables.js" />
+    <Content Include="Scripts\Functions\Receivables\datatables.js" />
+    <Content Include="Scripts\Functions\Receivables\datetimepicker.js" />
+    <Content Include="Scripts\Functions\Receivables\functions.js" />
+    <Content Include="Scripts\Functions\Receivables\initialize.js" />
+    <Content Include="Scripts\Functions\Receivables\print.js" />
+    <Content Include="Scripts\Functions\Receivables\save.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.min.js" />
     <Content Include="Scripts\i18n\defaults-bg_BG.js" />
@@ -802,6 +809,8 @@
     <Content Include="Views\Collections\Print.cshtml" />
     <Content Include="Views\EndDayTransaction\Print.cshtml" />
     <Content Include="Views\EndDayTransaction\PrintDetails.cshtml" />
+    <Content Include="Views\Receivables\Index.cshtml" />
+    <Content Include="Views\Receivables\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

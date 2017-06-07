@@ -1,35 +1,40 @@
 ﻿<div style="font-family: Calibri; font-size: 15px;">
     <div class="table-responsive" style="width: 100%;">
-        <table class="table table-condensed" style="border: none; font-family: Calibri; font-size: 15px;">
-            <tr style="border: none;">
-                <td class="col-md-4"></td>
-                <td class="col-md-4" style="text-align: center;"><strong>RGL LENDING</strong></td>
-                <td class="col-md-4"></td>
+        <table style="font-family: Calibri; width: 100%;">
+            <tr>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+                <td class="col-lg-4" style="text-align: center; width: 300px; font-size: 18px;"><strong>RGL LENDING</strong></td>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
             </tr>
-            <tr style="border: none;">
-                <td class="col-md-4"></td>
-                <td class="col-md-4" style="text-align: center;">Ma-a, Davao City</td>
-                <td class="col-md-4"></td>
+            <tr>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+                <td class="col-lg-4" style="text-align: center; width: 300px; font-size: 12px;">Maa, Davao City</td>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+            </tr>                  
+            <tr>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+                <td class="col-lg-4" style="text-align: center; width: 300px;">&nbsp</td>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
             </tr>
-            <tr style="border: none;">
-                <td class="col-md-4"></td>
-                <td class="col-md-4"></td>
-                <td class="col-md-4"></td>
+            <tr>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+                <td class="col-lg-4" style="text-align: center; width: 300px; font-size: 18px;"><strong>END-of-DAY TRANSACTION REPORT</strong></td>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
             </tr>
-            <tr style="border: none;">
-                <td class="col-md-4"></td>
-                <td class="col-md-4" style="text-align: center;"><strong>END-of-DAY TRANSACTION REPORT</strong></td>
-                <td class="col-md-4"></td>
-            </tr>
-            <tr style="border: none;">
-                <td class="col-md-4"></td>
-                <td class="col-md-4" style="text-align: center;">@ViewBag.dateNow</td>
-                <td class="col-md-4"></td>
+            <tr>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+                <td class="col-lg-4" style="text-align: center; width: 300px; font-size: 12px;">As of @ViewBag.dateString</td>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+            </tr>  
+            <tr>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
+                <td class="col-lg-4" style="text-align: center; width: 300px;">&nbsp</td>
+                <td class="col-lg-4" style="text-align: center; width: 100px;"></td>
             </tr>
         </table>
     </div>
     <div class="table-responsive" style="width: 100%;">
-        <table class="table table-condensed" style="border: none; font-family: Calibri; font-size: 12px;">
+        <table style="font-family: Calibri; font-size: 12px; width: 100%;">
             <tr>
                 <td class="col-md-6" style="text-align: left;">Cash Beginning: @ViewBag.CashBeginning</td>
                 <td class="col-md-6" style="text-align: right;">PLUS: Collections: @ViewBag.CashCollection</td>
@@ -42,22 +47,26 @@
                 <td class="col-md-6" style="text-align: left;"></td>
                 <td class="col-md-6" style="text-align: right;">Cash Pull-Out: @ViewBag.CashPullOut</td>
             </tr>
+            <tr>
+                <td class="col-md-6" style="text-align: left;">&nbsp</td>
+                <td class="col-md-6" style="text-align: right;"></td>
+            </tr>
         </table>
     </div>
-    
+
     <div class="table-responsive" style="width: 100%;">
         <table class="table table-bordered" style="font-family: Calibri; font-size: 12px;">
             <tr>
                 <th class="col-md-3" style="text-align: left; border-right: none; width: 200px;">List of Release:</th>
                 <th class="col-md-6" style="text-align: center; border-left: none; border-right: none;"></th>
-                <th class="col-md-3" style="text-align: right; border-left: none; "></th>
+                <th class="col-md-3" style="text-align: right; border-left: none;"></th>
             </tr>
             @foreach (var item in ViewBag.ReleaseList)
             {
                 <tr>
                     <td class="col-md-3" style="text-align: left;">@item.loan_no</td>
                     <td class="col-md-6" style="text-align: left;">@item.customer_name</td>
-                    <td class="col-md-3" style="text-align: right;">@item.net_proceeds</td>
+                    <td class="col-md-3" style="text-align: right;">@decimal.Round((decimal) item.net_proceeds, 2, MidpointRounding.AwayFromZero)</td>
                 </tr>
             }
         </table>
@@ -68,15 +77,15 @@
             <tr>
                 <th class="col-md-3" style="text-align: left; border-right: none; width: 200px;">List of Collections/Payments:</th>
                 <th class="col-md-6" style="text-align: center; border-left: none; border-right: none;"></th>
-                <th class="col-md-3" style="text-align: right; border-left: none; "></th>
+                <th class="col-md-3" style="text-align: right; border-left: none;"></th>
             </tr>
-            
+
             @foreach (var item in ViewBag.CollectionList)
             {
                 <tr>
                     <td class="col-md-3" style="text-align: left;">@item.reference_no</td>
                     <td class="col-md-6" style="text-align: left;">@item.payor_name</td>
-                    <td class="col-md-3" style="text-align: right;">@item.total_amount</td>
+                    <td class="col-md-3" style="text-align: right;">@decimal.Round((decimal) item.total_amount, 2, MidpointRounding.AwayFromZero)</td>
                 </tr>
             }
         </table>

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNoScripts.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/validation")
+@Scripts.Render("~/Scripts/moment.min.js")
+@Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+
+@Scripts.Render("~/Scripts/Datas/custom-common.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/select2.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/toastr.min.js")
+
+@Scripts.Render("~/Scripts/A-Custom/Tables/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.responsive.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/dataTables.bootstrap.min.js")
+@Scripts.Render("~/Scripts/A-Custom/Tables/responsive.bootstrap.min.js")
+@Scripts.Render("~/Scripts/bootstrap-select.min.js")
+@Scripts.Render("~/Scripts/jquery.number.min.js")
+
+<div class="container">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <label>As Of</label>
+                    <input id="asOf" class="form-control input-lg">
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <button id="preview" type="button" class="btn btn-success btn-sm btn-block" onclick="LoadPrint()">Preview</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <button id="cancel" type="button" class="btn btn-danger btn-sm btn-block" onclick="Cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+@Scripts.Render("~/Scripts/Functions/Receivables/initialize.js")
+@Scripts.Render("~/Scripts/Functions/Receivables/datetimepicker.js")
+@Scripts.Render("~/Scripts/Functions/Receivables/functions.js")
+@Scripts.Render("~/Scripts/Functions/Receivables/datatables.js")
+@Scripts.Render("~/Scripts/Functions/Receivables/save.js")
+@Scripts.Render("~/Scripts/Functions/Receivables/print.js")

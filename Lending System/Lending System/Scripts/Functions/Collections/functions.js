@@ -74,7 +74,7 @@ function PrepareSave() {
             }
             else if (payment < amountdue_number) {
 
-                $('#interest-payment-table').dataTable().fnUpdate(payment, $("#interest-payment-table tr")[i], 4);
+                $('#interest-payment-table').dataTable().fnUpdate(parseFloat(Math.round(payment * 100) / 100).toFixed(2), $("#interest-payment-table tr")[i], 4);
                 interestpayment = interestpayment + payment;
                 payment = payment - payment;
             }
@@ -103,7 +103,7 @@ function PrepareSave() {
             }
             else if (payment < amountdue_number) {
 
-                $('#principal-payment-table').dataTable().fnUpdate(payment, $("#principal-payment-table tr")[i], 4);
+                $('#principal-payment-table').dataTable().fnUpdate(parseFloat(Math.round(payment * 100) / 100).toFixed(2), $("#principal-payment-table tr")[i], 4);
                 principalpayment = principalpayment + payment;
                 payment = payment - payment;
             }

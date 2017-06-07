@@ -120,6 +120,7 @@ namespace Lending_System.Controllers
                 decimal loan_granted = 0;
                 decimal interest_rate = 0;
                 decimal interest = 0;
+                decimal paymentsInterest = 0;
 
                 List<collectionslist> collectionslist = new List<collectionslist>();
                 collectionslist collection = new collectionslist();
@@ -131,6 +132,7 @@ namespace Lending_System.Controllers
 
                     balance = GetBalance(dt.loan_no);
                     payments = GetPayments(dt.loan_no);
+                    paymentsInterest = GetPaymentsInterest(dt.loan_no);
                     total_balance = balance - payments;
 
                     interest_rate = (decimal)dt.loan_interest_rate;
@@ -260,7 +262,10 @@ namespace Lending_System.Controllers
 
                     interestBalance = decimal.Round((decimal)interestBalance, 2, MidpointRounding.AwayFromZero);
 
-                    collectionslist.Add(new collectionslist { loan_no = dt.loan_no, loan_type = dt.loan_name, due_date = dt.due_date, amount_due = interestBalance, payment = 0, interest = dt.loan_interest_rate, interest_type = GetInterestType(dt.loan_name) });
+                    if (interestBalance > 0)
+                    {
+                        collectionslist.Add(new collectionslist { loan_no = dt.loan_no, loan_type = dt.loan_name, due_date = dt.due_date, amount_due = interestBalance, payment = 0, interest = dt.loan_interest_rate, interest_type = GetInterestType(dt.loan_name) });
+                    }
                 }
 
                 var data = collectionslist.ToList();
