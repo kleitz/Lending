@@ -182,10 +182,10 @@
             <PropertyRef Name="autonum" />
           </Key>
           <Property Name="autonum" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="reference_no" Type="varchar" MaxLength="25" />
-          <Property Name="payment_type" Type="varchar" MaxLength="25" />
+          <Property Name="reference_no" Type="varchar" MaxLength="50" />
+          <Property Name="payment_type" Type="varchar" MaxLength="50" />
           <Property Name="loan_no" Type="varchar" MaxLength="25" />
-          <Property Name="loan_name" Type="varchar" MaxLength="75" />
+          <Property Name="loan_name" Type="varchar" MaxLength="50" />
           <Property Name="due_date" Type="date" />
           <Property Name="amount" Type="decimal" Precision="15" Scale="4" />
           <Property Name="date_created" Type="datetime" Precision="0" />

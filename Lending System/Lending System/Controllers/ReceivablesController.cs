@@ -42,6 +42,10 @@ namespace Lending_System.Controllers
                         decimal? totalBalance = 0;
 
                         List<receivables> receivablesList = new List<receivables>();
+                        List<receivables> receivablesList1 = new List<receivables>();
+                        var count = 0;
+                        var count1 = 0;
+
                         var result = from d in db.tbl_loan_processing where (d.due_date <= dateVar) && d.status == "Released" orderby d.customer_name ascending select d;
                         foreach (var dt in result)
                         {
@@ -56,13 +60,26 @@ namespace Lending_System.Controllers
 
                             if (balance > 0)
                             {
-                                receivablesList.Add(new receivables { loanNo = dt.loan_no, customerName = dt.customer_name.ToString().ToUpperInvariant(), dueDate = String.Format("{0:MM/dd/yyyy}", dt.due_date), principal = String.Format("{0:n}", principal), interest = String.Format("{0:n}", interest), payment = String.Format("{0:n}", payment), balance = String.Format("{0:n}", balance) });
+                                if (GetInterestType(dt.loan_name) == "1")
+                                {
+                                    receivablesList.Add(new receivables { loanNo = dt.loan_no, customerName = dt.customer_name.ToString().ToUpperInvariant(), dueDate = String.Format("{0:MM/dd/yyyy}", dt.due_date), principal = String.Format("{0:n}", principal), interest = String.Format("{0:n}", interest), payment = String.Format("{0:n}", payment), balance = String.Format("{0:n}", balance) });
+                                    count += 1;
+                                }
+                                else
+                                {
+                                    receivablesList1.Add(new receivables { loanNo = dt.loan_no, customerName = dt.customer_name.ToString().ToUpperInvariant(), dueDate = String.Format("{0:MM/dd/yyyy}", dt.due_date), principal = String.Format("{0:n}", principal), interest = String.Format("{0:n}", interest), payment = String.Format("{0:n}", payment), balance = String.Format("{0:n}", balance) });
+                                    count1 += 1;
+                                }
+                         
                                 totalBalance = totalBalance + balance;
                             }
                         }
 
                         ViewBag.dateString = String.Format("{0:MMMM dd, yyyy}", date);
                         ViewBag.receivableList = receivablesList;
+                        ViewBag.receivableList1 = receivablesList1;
+                        ViewBag.count = count;
+                        ViewBag.count1 = count1;
                         ViewBag.totalBalance = decimal.Round((decimal)totalBalance, 2, MidpointRounding.AwayFromZero);
                         ViewBag.totalBalance = String.Format("{0:n}", ViewBag.totalBalance);                      
                     }           
@@ -237,7 +254,7 @@ namespace Lending_System.Controllers
              db = new db_lendingEntities();
             {
                 var interest_type = "";
-                var result = from d in db.tbl_loan_type where d.description.Contains(id) select d;
+                var result = from d in db.tbl_loan_type where d.description == id select d;
                 foreach (var data in result)
                 {
                     interest_type = data.interest_type;

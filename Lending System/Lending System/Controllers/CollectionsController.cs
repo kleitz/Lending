@@ -282,7 +282,7 @@ namespace Lending_System.Controllers
             db_lendingEntities db = new db_lendingEntities();
             {
                 decimal balance = 0;
-                var result = from d in db.tbl_loan_processing where d.loan_no.Contains(id) select d.total_receivable;
+                var result = from d in db.tbl_loan_processing where d.loan_no == id select d.total_receivable;
                 foreach (var data in result)
                 {
                     balance = data.Value;
@@ -455,7 +455,7 @@ namespace Lending_System.Controllers
             db_lendingEntities db = new db_lendingEntities();
             {
                 decimal balance = 0;
-                var result = from d in db.tbl_payment_details where d.loan_no.Contains(id) && d.payment_type.Equals("OR Payment") select d.amount;
+                var result = from d in db.tbl_payment_details where d.loan_no == id && d.payment_type.Equals("OR Payment") select d.amount;
                 foreach (var data in result)
                 {
                     balance = balance + data.Value;
@@ -484,7 +484,7 @@ namespace Lending_System.Controllers
             db_lendingEntities db = new db_lendingEntities();
             {
                 var interest_type = "";
-                var result = from d in db.tbl_loan_type where d.description.Contains(id) select d;
+                var result = from d in db.tbl_loan_type where d.description.Equals(id) select d;
                 foreach (var data in result)
                 {
                     interest_type = data.interest_type;
