@@ -284,3 +284,5 @@ D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Release\Lendin
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Release\Lending System.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Release\Lending System.pdb
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\Neodynamic.SDK.WebClientPrint.dll
+D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\MySql.Data.xml
+D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\MySql.Data.Entity.EF6.xml

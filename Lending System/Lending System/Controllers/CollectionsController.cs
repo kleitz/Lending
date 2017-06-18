@@ -310,13 +310,13 @@ namespace Lending_System.Controllers
                             balance = data.balance;
                             break;
                         case "Late Payment Interest":
-                            balance = balance + data.interest;
+                            balance = balance + decimal.Round((decimal)data.interest, 2, MidpointRounding.AwayFromZero);
                             break;
                         case "OR Payment":
-                            balance = balance - data.amount_paid;
+                            balance = balance - decimal.Round((decimal)data.amount_paid, 2, MidpointRounding.AwayFromZero);
                             break;
                         case "OR Payment Interest":
-                            balance = balance - data.interest;
+                            balance = balance - decimal.Round((decimal)data.interest, 2, MidpointRounding.AwayFromZero);
                             break;
                         default:
                             break;
@@ -404,13 +404,13 @@ namespace Lending_System.Controllers
                                 balance = data.balance;
                                 break;
                             case "Late Payment Interest":
-                                balance = balance + data.interest;
+                                balance = balance + decimal.Round((decimal)data.interest, 2, MidpointRounding.AwayFromZero);
                                 break;
                             case "OR Payment":
-                                balance = balance - data.amount_paid;
+                                balance = balance - decimal.Round((decimal)data.amount_paid, 2, MidpointRounding.AwayFromZero); 
                                 break;
                             case "OR Payment Interest":
-                                balance = balance - data.interest;
+                                balance = balance - decimal.Round((decimal)data.interest, 2, MidpointRounding.AwayFromZero);
                                 break;
                             default:
                                 break;
