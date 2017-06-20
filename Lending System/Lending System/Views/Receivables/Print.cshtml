@@ -87,15 +87,15 @@
                                     <td style="text-align: right;">@item.balance</td>
                                 </tr>
                             }
-                            @*<tr>
-                                <th style="text-align: left; width: 100px;">&nbsp</th>
-                                <th style="text-align: left; width: 300px;"></th>
-                                <th style="text-align: left; width: 100px;"></th>
-                                <th style="text-align: left; width: 100px;"></th>
-                                <th style="text-align: left; width: 100px;"></th>
-                                <th style="text-align: left; width: 100px;"></th>
-                                <th style="text-align: left; width: 100px;"></th>
-                            </tr>*@
+                            <tr>
+                                <td style="text-align: left;"></td>
+                                <td style="text-align: left;"></td>
+                                <td style="text-align: left;"></td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;"></td>
+                                <td style="text-align: right;"><strong>@ViewBag.Balance1</strong></td>
+                            </tr>
                         </table>
                     </div>
                     @if (ViewBag.count1 != 0)
@@ -123,9 +123,55 @@
                                         <td style="text-align: right;">@item.balance</td>
                                     </tr>
                                 }
+                                <tr>
+                                    <td style="text-align: left;"></td>
+                                    <td style="text-align: left;"></td>
+                                    <td style="text-align: left;"></td>
+                                    <td style="text-align: right;"></td>
+                                    <td style="text-align: right;"></td>
+                                    <td style="text-align: right;"></td>
+                                    <td style="text-align: right;"><strong>@ViewBag.Balance2</strong></td>
+                                </tr>
                             </table>
                         </div>
-                    }                  
+                    }     
+                    @if (ViewBag.count2 != 0)
+                    {
+                        <div class="table-responsive" style="width: 100%;">
+                            <table class="table table-bordered" style="font-family: Calibri; font-size: 12px;">
+                                <tr>
+                                    <th style="text-align: left; width: 100px;">Loan No</th>
+                                    <th style="text-align: left; width: 300px;">Customer Name</th>
+                                    <th style="text-align: left; width: 100px;">Due Date</th>
+                                    <th style="text-align: left; width: 100px;">Principal</th>
+                                    <th style="text-align: left; width: 100px;">Interest</th>
+                                    <th style="text-align: left; width: 100px;">Payment</th>
+                                    <th style="text-align: left; width: 100px;">Balance</th>
+                                </tr>
+                                @foreach (var item in ViewBag.receivableList2)
+                                {
+                                    <tr>
+                                        <td style="text-align: left;">@item.loanNo</td>
+                                        <td style="text-align: left;">@item.customerName</td>
+                                        <td style="text-align: left;">@item.dueDate</td>
+                                        <td style="text-align: right;">@item.principal</td>
+                                        <td style="text-align: right;">@item.interest</td>
+                                        <td style="text-align: right;">@item.payment</td>
+                                        <td style="text-align: right;">@item.balance</td>
+                                    </tr>
+                                }
+                                <tr>
+                                    <td style="text-align: left;"></td>
+                                    <td style="text-align: left;"></td>
+                                    <td style="text-align: left;"></td>
+                                    <td style="text-align: right;"></td>
+                                    <td style="text-align: right;"></td>
+                                    <td style="text-align: right;"></td>
+                                    <td style="text-align: right;"><strong>@ViewBag.Balance3</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    }               
                     <!--- Footer --->
                     <div class="table-responsive" style="width: 100%;">
                         <table style="font-family: Calibri; width: 100%;">
