@@ -139,7 +139,7 @@ var getReferenceNo =
                 success: function (response) { $('#txtreference_no').val(response) },
                 complete: function (response) {
                     // Schedule the next
-                    setTimeout(getReferenceNo.InitializeEvents, interval)
+                    setTimeout(getReferenceNo.InitializeEvents, interval);
                 },
                 error: ""
             });

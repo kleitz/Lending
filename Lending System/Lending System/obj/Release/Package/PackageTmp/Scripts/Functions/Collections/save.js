@@ -27,7 +27,9 @@ function AjaxSave() {
         complete: function (data) {
             $.when(AjaxSaveDetailsInterest().done(AjaxSaveDetailsPrincipal().done(AjaxSaveLedger()))).then(
                 toastr.success('Successfully saved.', 'Save')
-            ).done();
+            ).done(
+            
+            );
         }
     });
     
@@ -125,7 +127,10 @@ function AjaxSaveDetailsPrincipal() {
                     data: JSON.stringify(myObj),
                     contentType: 'application/json',
                     success: function (response) { deferred.resolve(); },
-                    error: function (response) { deferred.reject(); }
+                    error: function (response) { deferred.reject(); },
+                    complete: function(data) {
+                        setTimeout(LoadReceipt(ref_no), 300);
+                    }
                 });
             }      
         }
@@ -200,7 +205,7 @@ function AjaxSaveLedger() {
 }
 
 function AjaxSaveToLedger() {
-
+    var deferred = $.Deferred();
     var totalRowCount1 = $("#interest-payment-table tr").length;
     var rowText1;
 
@@ -279,6 +284,9 @@ function AjaxSaveToLedger() {
             }
         }
     }
+    deferred = deferred.resolve();
+
+    return deferred.promise();
 }
 
 function AjaxSaveLedgerDetail(trans_type, reference_no, loan_id, loan_name, interest_type, interest_rate, interest, amount_paid, principal, balance) {
@@ -313,10 +321,7 @@ function AjaxSaveLedgerDetail(trans_type, reference_no, loan_id, loan_name, inte
         success: function (response) { deferred.resolve(); },
         error: function (response) { deferred.reject(); },
         complete: function(data) {
-            setTimeout(function () {
-                    LoadReceipt(data.responseJSON);
-                },
-                300);
+
         }
 
     });
