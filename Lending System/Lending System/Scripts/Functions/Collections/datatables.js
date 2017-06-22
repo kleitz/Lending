@@ -1,4 +1,5 @@
-﻿var LoanPrincipalDue =
+﻿
+var LoanPrincipalDue =
         {
             InitializeEvents: function () {
                 
@@ -27,8 +28,8 @@
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                            { "data": "amount_due", "className": "dt-right" },
-                            { "data": "payment", "className": "dt-right" },
+                            { "data": "amount_due", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                            { "data": "payment", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
                             { "data": "interest_type", "className": "hide" },
                             { "data": "interest", "className": "hide" }
                     ],
@@ -64,8 +65,8 @@ var LoanInterestDue =
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                        { "data": "amount_due", "className": "dt-right" },
-                            { "data": "payment", "className": "dt-right" },
+                            { "data": "amount_due", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                            { "data": "payment", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
                             { "data": "interest_type", "className": "hide" },
                             { "data": "interest", "className": "hide" }
                     ]
@@ -151,7 +152,7 @@ var LoanPrincipalDueViewing =
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                            { "data": "amount", "className": "dt-right" }
+                            { "data": "amount", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') }
                     ],
                     "fnInitComplete": function (oSettings, json) {
                         $.when(LoanInterestDueViewing.InitializeEvents());
@@ -190,7 +191,7 @@ var LoanInterestDueViewing =
                                     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                                 }
                             },
-                            { "data": "amount", "className": "dt-right" }
+                            { "data": "amount", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') }
                     ],
                     "fnInitComplete": function (oSettings, json) {
                         ComputeTotals();
@@ -202,14 +203,14 @@ var LoanInterestDueViewing =
             }
         }
 
-function LoadReceipt() {
-    
-    var url = RootUrl + "/Collections/Print?id=" + $('#txtreference_no').val();
+function LoadReceipt(arg) {
+    var url = RootUrl + "/Collections/Print?id=" + arg;
     var encodedParam = encodeURIComponent(url);
 
-    $('#receipt').load(url, function () {
-        $('#ModalPrint').modal('show');
-    })
+    $('#receipt').load(url,
+        function() {
+            $('#ModalPrint').modal('show');
+        });
 
     //$.ajax({
     //    url: RootUrl + "/Collections/LoadRePrint?id=" + $('#txtreference_no').val(),

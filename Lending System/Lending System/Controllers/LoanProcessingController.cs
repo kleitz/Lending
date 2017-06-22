@@ -20,6 +20,10 @@ namespace Lending_System.Controllers
         {
             if (Session["UserId"] != null)
             {
+                ViewBag.Form = "Loan Processing";
+                ViewBag.Controller = "Loan Processing";
+                ViewBag.Action = "Index";
+
                 return View();
             }
             else
@@ -34,7 +38,7 @@ namespace Lending_System.Controllers
                 using (db_lendingEntities db = new db_lendingEntities())
                 {
                     //var data = db.tbl_loan_processing.Where(a => a.loan_date >= DateTime.Now && a.loan_date <= DateTime.Now).ToList();
-                    var data = db.tbl_loan_processing.OrderBy(a => a.loan_date).ToList();
+                    var data = db.tbl_loan_processing.OrderBy(a => a.status).ToList();
 
                     return Json(new { data = data }, JsonRequestBehavior.AllowGet);
                 }
@@ -60,6 +64,11 @@ namespace Lending_System.Controllers
                 {
                     return HttpNotFound();
                 }
+
+                ViewBag.Form = "Loan Processing";
+                ViewBag.Controller = "Loan Processing";
+                ViewBag.Action = "Details";
+
                 LoadCustomer();
                 LoadLoanType();
                 return View(tbl_loan_processing);
@@ -152,6 +161,10 @@ namespace Lending_System.Controllers
             ViewBag.InterestTypeID = "";
             if (Session["UserId"] != null)
             {
+                ViewBag.Form = "Loan Processing";
+                ViewBag.Controller = "Loan Processing";
+                ViewBag.Action = "Create";
+
                 LoadCustomer();
                 LoadLoanType();
 

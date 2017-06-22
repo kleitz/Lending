@@ -1,0 +1,109 @@
+﻿<div class="sidebar-content ">
+    <!-- User menu -->
+    <div class="sidebar-user">
+        <div class="category-content">
+            <div class="media">
+                <a href="#" class="media-left"><img src="~/Assets/images/default.jpg" class="img-circle img-sm" alt=""></a>
+                <div class="media-body">
+                    <span class="media-heading text-semibold">Administrator</span>
+                    <div class="text-size-mini text-muted">
+                        Administrator
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /user menu -->
+    
+    @if (Session["UserRank"].ToString() == "1")
+    {
+        <!-- Main navigation -->
+        <div class="sidebar-category sidebar-category-visible">
+            <div class="category-content no-padding">
+                <ul class="navigation navigation-main navigation-accordion">
+                    <!-- Main -->
+                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main"></i></li>
+                    <li class="@ViewBag.activeDashboard"><a href="~/LoanProcessing/Index"><i class="icon-credit-card2"></i> <span>Loan Processing</span></a></li>
+                    <li class="@ViewBag.activeAppraisal"><a href="~/Collections/Index"><i class="icon-drawer-in"></i> <span>Collection</span></a></li>
+                    <li class="@ViewBag.activePawning"><a href="~/CashPullOut/Index"><i class="icon-drawer-out"></i> <span>Cash Pull Out</span></a></li>
+                    <li class="@ViewBag.activePawning"><a href="~/EndDayTransaction/Index"><i class="icon-calendar2"></i> <span>End of Day Transaction</span></a></li>
+
+                    <li class="@ViewBag.activeCollection"><a href="~/LoanLedger/Index"><i class="icon-info22"></i> <span>Loan Information</span></a></li>
+                    <!-- /main -->
+                    <!-- System Reference -->
+                    <li class="navigation-header"><span>System Reference</span> <i class="icon-menu" title="System Maintenance"></i></li>
+                    <li class="@ViewBag.activeCustomerProfile"><a href="~/Customer/Index"><i class="icon-users4"></i> <span>Customer Profile</span></a></li>
+                    <li class="@ViewBag.activeItemCategory"><a href="~/Loans/Index"><i class="icon-stack2"></i> <span>Loan Type</span></a></li>
+                    <li class="@ViewBag.activeItemCategory"><a href="~/Fees/Index"><i class="icon-stack3"></i> <span>Fees</span></a></li>
+                    <!-- /System Reference -->
+                    <!-- System Reports -->
+                    <li class="navigation-header"><span>System Reports</span> <i class="icon-menu" title="System Reports"></i></li>
+                    <li class="@ViewBag.activeUserAccount"><a href="~/Receivables/Index"><i class="icon-drawer-in"></i> <span>Receivables</span></a></li>
+                    <!-- /System Reports -->
+                </ul>
+            </div>
+        </div>
+        <!-- /main navigation -->
+    }
+    @if (Session["UserRank"].ToString() == "2")
+    {
+        <!-- Main navigation -->
+        <div class="sidebar-category sidebar-category-visible">
+            <div class="category-content no-padding">
+                <ul class="navigation navigation-main navigation-accordion">
+                    <!-- Main -->
+                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main"></i></li>
+                    <li class="@ViewBag.activeDashboard"><a href="~/LoanProcessing/Index"><i class="icon-credit-card2"></i> <span>Loan Processing</span></a></li>
+                    <li class="@ViewBag.activeAppraisal"><a href="~/Collections/Index"><i class="icon-drawer-in"></i> <span>Collection</span></a></li>
+                    <li class="@ViewBag.activePawning"><a href="~/CashPullOut/Index"><i class="icon-drawer-out"></i> <span>Cash Pull Out</span></a></li>
+                    <li class="@ViewBag.activePawning"><a href="~/EndDayTransaction/Index"><i class="icon-calendar2"></i> <span>End of Day Transaction</span></a></li>
+
+                    <li class="@ViewBag.activeCollection"><a href="~/LoanLedger/Index"><i class="icon-info22"></i> <span>Loan Information</span></a></li>
+                    <!-- /main -->
+                    <!-- System Reference -->
+                    <li class="navigation-header"><span>System Reference</span> <i class="icon-menu" title="System Maintenance"></i></li>
+                    <li class="@ViewBag.activeCustomerProfile"><a href="~/Customer/Index"><i class="icon-users4"></i> <span>Customer Profile</span></a></li>
+                    <li class="@ViewBag.activeItemCategory"><a href="~/Loans/Index"><i class="icon-stack2"></i> <span>Loan Type</span></a></li>
+                    <li class="@ViewBag.activeItemCategory"><a href="~/Fees/Index"><i class="icon-stack3"></i> <span>Fees</span></a></li>
+                    <!-- /System Reference -->
+                    <!-- System Reports -->
+                    <li class="navigation-header"><span>System Reports</span> <i class="icon-menu" title="System Reports"></i></li>
+                    <li class="@ViewBag.activeUserAccount"><a href="~/Receivables/Index"><i class="icon-drawer-in"></i> <span>Receivables</span></a></li>
+                    <!-- /System Reports -->
+                </ul>
+            </div>
+        </div>
+        <!-- /main navigation -->
+    }
+    @if (Session["UserRank"].ToString() == "3")
+    {
+        <!-- Main navigation -->
+        <div class="sidebar-category sidebar-category-visible">
+            <div class="category-content no-padding">
+                <ul class="navigation navigation-main navigation-accordion">
+                    <!-- Main -->
+                    <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main"></i></li>
+                    <li class="@ViewBag.activeDashboard"><a href="~/LoanProcessing/Index"><i class="icon-credit-card2"></i> <span>Loan Processing</span></a></li>
+                    <li class="@ViewBag.activeAppraisal"><a href="~/Collections/Index"><i class="icon-drawer-in"></i> <span>Collection</span></a></li>
+                    <li class="@ViewBag.activePawning"><a href="~/CashPullOut/Index"><i class="icon-drawer-out"></i> <span>Cash Pull Out</span></a></li>
+                    <li class="@ViewBag.activePawning"><a href="~/EndDayTransaction/Index"><i class="icon-calendar2"></i> <span>End of Day Transaction</span></a></li>
+
+                    <li class="@ViewBag.activeCollection"><a href="~/LoanLedger/Index"><i class="icon-info22"></i> <span>Loan Information</span></a></li>
+                    <!-- /main -->
+                    <!-- System Reference -->
+                    <li class="navigation-header"><span>System Reference</span> <i class="icon-menu" title="System Maintenance"></i></li>
+                    <li class="@ViewBag.activeCustomerProfile"><a href="~/Customer/Index"><i class="icon-users4"></i> <span>Customer Profile</span></a></li>
+                    <li class="@ViewBag.activeItemCategory"><a href="~/Loans/Index"><i class="icon-stack2"></i> <span>Loan Type</span></a></li>
+                    <li class="@ViewBag.activeItemCategory"><a href="~/Fees/Index"><i class="icon-stack3"></i> <span>Fees</span></a></li>
+                    <!-- /System Reference -->
+                    <!-- System Reports -->
+                    <li class="navigation-header"><span>System Reports</span> <i class="icon-menu" title="System Reports"></i></li>
+                    <li class="@ViewBag.activeUserAccount"><a href="~/Receivables/Index"><i class="icon-drawer-in"></i> <span>Receivables</span></a></li>
+                    <!-- /System Reports -->
+                </ul>
+            </div>
+        </div>
+        <!-- /main navigation -->
+    }
+
+</div>

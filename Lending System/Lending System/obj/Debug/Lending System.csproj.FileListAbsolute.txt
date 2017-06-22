@@ -188,6 +188,7 @@ D:\MLGS\Work\GitHub\Lending System\Lending System\bin\System.Web.WebPages.Razor.
 D:\MLGS\Work\GitHub\Lending System\Lending System\obj\Debug\Lending System.dll
 D:\MLGS\Work\GitHub\Lending System\Lending System\obj\Debug\Lending System.pdb
 D:\MLGS\Work\GitHub\Lending System\Lending System\obj\Debug\Lending System.csprojResolveAssemblyReference.cache
+D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\ApplicationInsights.config
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\csc.exe
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\csc.exe.config
@@ -200,7 +201,6 @@ D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microso
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
-D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.CSharp.Core.targets
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
@@ -273,6 +273,8 @@ D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\Microsoft.AI.W
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\Microsoft.AI.WindowsServer.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\Microsoft.ApplicationInsights.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\MySql.Data.xml
+D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\MySql.Data.Entity.EF6.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\Newtonsoft.Json.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.Helpers.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.Mvc.xml
@@ -283,6 +285,3 @@ D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.Web
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.WebPages.Razor.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.pdb
-D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.csprojResolveAssemblyReference.cache
-D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\MySql.Data.xml
-D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\MySql.Data.Entity.EF6.xml

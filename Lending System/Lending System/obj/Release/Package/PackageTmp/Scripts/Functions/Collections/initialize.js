@@ -3,5 +3,5 @@
         RootUrl = ""
     }
 
-    LoanPrincipalDueViewing.InitializeEvents()
+    LoanPrincipalDueViewing.InitializeEvents();
 });

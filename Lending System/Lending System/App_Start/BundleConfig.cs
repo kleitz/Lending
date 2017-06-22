@@ -76,6 +76,19 @@ namespace Lending_System
                     "~/Content/UI/components/transition.js",
                     "~/Content/UI/components/dropdown.js",
                     "~/Content/UI/components/visibility.js"));
+
+            // knockout js bundling
+            bundles.Add(new ScriptBundle("~/bundles/knockoutjs").Include(
+                "~/Scripts/knockout-{version}.js"));
+
+            // ko global
+            bundles.Add(new ScriptBundle("~/bundles/ko-global").Include(
+                "~/Assets/kojs/app.js",
+                "~/Assets/kojs/helper.js"));
+
+            // toastr
+            bundles.Add(new StyleBundle("~/bundles/toastr-style").Include("~/Content/toastr.min.css"));
+            bundles.Add(new ScriptBundle("~/bundles/toastr-script").Include("~/Scripts/toastr.min.js"));
         }
     }
 }

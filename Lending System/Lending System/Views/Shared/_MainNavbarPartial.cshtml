@@ -1,0 +1,34 @@
+﻿<div class="navbar-header">
+    <a class="navbar-brand" href="~/Home"><img src="~/Images/Logo/logo.png" alt=""></a>
+    <ul class="nav navbar-nav visible-xs-block">
+        <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+        <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+    </ul>
+</div>
+<div class="navbar-collapse collapse" id="navbar-mobile">
+    <ul class="nav navbar-nav">
+        <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown dropdown-user">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <img src="~/Assets/images/default.jpg" alt="">
+                <span>@Session["UserFullName"].ToString().ToUpper()</span>
+                <i class="caret"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                @*<li><a href="#"><i class="icon-user"></i> My profile</a></li>
+                <li><a href="#"><i class="icon-user-lock"></i> Change Password</a></li>*@
+                <li>
+                    @using (Html.BeginForm("Logout", "Account", new {area = ""}, FormMethod.Post, new {id = "logoutForm"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a href="javascript:document.getElementById('logoutForm').submit()" style="clear: both; color: #333333; display: block; font-weight: normal; line-height: 1.53846; outline: 0 none; overflow: hidden; padding: 8px 15px; text-overflow: ellipsis;">
+                            <i class="icon-switch2" style="float: left; margin-right: 12px; margin-top: 2px; top: 0;"></i> Logout
+                        </a>
+                    }
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

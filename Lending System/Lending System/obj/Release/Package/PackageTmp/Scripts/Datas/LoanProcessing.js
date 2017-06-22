@@ -14,13 +14,13 @@ var List =
                     "type": "GET",
                     "datatype": "json"
                 },
-                "order": [[5, "desc"]],
+                "order": [[6, "asc"]],
                 "columns": [
                         { "data": "autonum", "className": "hide"},
                         { "data": "loan_no", "className": "dt-center" },
                         { "data": "customer_name", "className": "dt-left" },
                         { "data": "loan_name", "className": "dt-left" },
-                        { "data": "loan_granted", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '₱') },
+                        { "data": "loan_granted", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
                         {
                             "data": "loan_date", "className": "dt-left",
                             "render": function (data, type, row) {

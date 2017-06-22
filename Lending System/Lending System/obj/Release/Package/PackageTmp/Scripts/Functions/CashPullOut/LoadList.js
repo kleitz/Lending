@@ -31,7 +31,7 @@ var List =
                             }
                         },
                         { "data": "username", "className": "dt-left" },
-                        { "data": "amount", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '₱') },
+                        { "data": "amount", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') }
                 ],
 
             });

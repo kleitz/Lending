@@ -29,7 +29,7 @@ var List =
                         },
                         { "data": "reference_no", "className": "dt-left" },
                         { "data": "payor_name", "className": "dt-left" },
-                        { "data": "total_amount", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '₱') },
+                        { "data": "total_amount", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
                         {
                             "render": function (data, type, row) { return '<a href="' + RootUrl + '/Collections/Details?id=' + row.autonum + '"><span title="Details">View</span></a>'
                             + ' <a href="' + RootUrl + '/Collections/Print?id=' + row.reference_no + '"><span class="fa fa-print" style="font-size: 18px" title="Print"></span></a>'

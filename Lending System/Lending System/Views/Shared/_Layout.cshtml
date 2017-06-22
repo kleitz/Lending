@@ -1,42 +1,117 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/core.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/components.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/css/colors.css" rel="stylesheet" type="text/css">
+    <!-- /global stylesheets -->
+    
+    <style>
+        .bg-grey-800 {
+            background-color: #101010;
+            border-color: #101010;
+            color: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+    </script>
+
+    <!-- Sweet Alert css -->
+    <link href="~/Assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
+
+    @Styles.Render("~/bundles/toastr-style")
+
+    @RenderSection("styles", required: false)
+
+    <!--knockout js references-->
+    @Scripts.Render("~/bundles/knockoutjs")
+    @Scripts.Render("~/bundles/ko-global")
+
+    <!-- Core JS files -->
+    <script type="text/javascript" src="~/Assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="~/Assets/js/plugins/forms/styling/switch.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="~/Assets/js/core/app.js"></script>
+    
+    @*<script type="text/javascript" src="~/Assets/js/plugins/tables/datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/pages/datatables_basic.js"></script>*@
+    
+    <script type="text/javascript" src="~/Assets/js/plugins/forms/selects/select2.min.js"></script>
+    <!-- /theme JS files -->
+
+    <script src="~/Assets/kojs/knockout-bootstrap.js"></script>
+    <script src="~/Assets/kojs/ajaxLoader.js"></script>
+
+    <!-- Sweet Alert js -->
+    <script src="~/Assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
+
+    <!-- Toastr js -->
+    @Scripts.Render("~/bundles/toastr-script")
+
     @RenderSection("scripts", required: false)
+
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+</head>
+
+
+<body>
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse bg-grey-800">
+        @Html.Partial("_MainNavbarPartial")
+    </div>
+    <!-- /main navbar -->
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main sidebar -->
+            <div class="sidebar sidebar-main bg-grey-800">
+                @Html.Partial("_SidebarPartial")
+            </div>
+            <!-- /main sidebar -->
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="page-header page-header-default">
+                    @Html.Partial("_PageHeaderPartial")
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="content">
+                    @RenderBody()
+
+                    <!-- Footer -->
+                    <div class="footer text-muted">
+                        @Html.Partial("_FooterPartial")
+                    </div>
+                    <!-- /footer -->
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+        </div>
+        <!-- /page content -->
+    </div>
+    <!-- /page container -->
+
 </body>
 </html>

@@ -20,10 +20,10 @@ var AmortizationTable =
                     "bInfo": false,
                     "columns": [
                             { "data": "due_date", "className": "dt-left" },
-                            { "data": "loan_granted", "autoWidth": "dt-right" },
-                            { "data": "interest", "className": "dt-right" },
-                            { "data": "net_proceeds", "className": "dt-right" },
-                            { "data": "balance", "className": "dt-right" }
+                            { "data": "loan_granted", "autoWidth": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                            { "data": "interest", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                            { "data": "net_proceeds", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                            { "data": "balance", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') }
                     ]
                 });
             }

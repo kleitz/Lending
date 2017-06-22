@@ -4,10 +4,10 @@ $(document).ready(function () {
         RootUrl = ""
     }
     List.InitializeEvents();
-    $('input.number').number(true, 2);
-    $('span.number').number(true, 4);
+    //$('input.number').number(true, 2);
+    //$('span.number').number(true, 4);
 
-    GetCashReleased();
+    //GetCashReleased();
 
     setInterval(function () {
         table.ajax.reload();
@@ -17,16 +17,15 @@ $(document).ready(function () {
 var table;
 var List =
     {
-        InitializeEvents: function () {          
-            $("#loan-table").dataTable().fnDestroy()
+        InitializeEvents: function () {
+            $("#loan-table").dataTable().fnDestroy();
             table = $('#loan-table').DataTable({
                 "ajax": {
                     "url": RootUrl + "/Home/LoadList",
                     "type": "GET",
-                    "datatype": "json",
+                    "datatype": "json"
                 },
                 "columns": [
-                        { "data": "autonum", "className": "hide" },
                         {
                             "data": "loan_date", "className": "dt-left",
                             "render": function (data, type, row) {
@@ -38,7 +37,7 @@ var List =
                         },
                         { "data": "loan_no", "className": "dt-center" },
                         { "data": "customer_name", "className": "dt-left" },
-                        { "data": "loan_granted", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '₱') }
+                        { "data": "loan_granted", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') }
 
                 ]
             });

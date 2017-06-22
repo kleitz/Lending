@@ -48,8 +48,6 @@ namespace Lending_System.Controllers
         }
         public ActionResult Create()
         {
-            db_lendingEntities db = new db_lendingEntities();
-
             if (Session["UserId"] != null)
             {
                 LoadCustomer();
@@ -65,21 +63,34 @@ namespace Lending_System.Controllers
         {
             try
             {
-                var CustomerList = new List<SelectListItem>();
-                var dbQuery = from d in db.tbl_customer select d;
-                foreach (var d in dbQuery)
+                using (db = new db_lendingEntities())
                 {
-                    if (d.firstname != "" || d.firstname != null)
+                    var customerList = new List<SelectListItem>();
+                    var dbQuery = from d in db.tbl_customer select d;
+                    foreach (var d in dbQuery)
                     {
-                        CustomerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname + ", " + d.firstname + " " + d.middlename });
+                        if ((d.firstname != null) && (d.lastname != null) && (d.middlename != null))
+                        {
+                            customerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname.ToUpper() + ", " + d.firstname.ToUpper() + " " + d.middlename.ToUpper() });
+                        }
+                        if ((d.firstname != null) && (d.lastname != null) && (d.middlename == null))
+                        {
+                            customerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname.ToUpper() + ", " + d.firstname.ToUpper() });
+                        }
+                        if ((d.firstname != null) && (d.lastname == null) && (d.middlename == null))
+                        {
+                            customerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text =  d.firstname.ToUpper() });
+                        }
                     }
+                    ViewBag.Customer = new SelectList(customerList, "Value", "Text");
                 }
-                ViewBag.Customer = new SelectList(CustomerList, "Value", "Text");
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 throw;
             }
+
         }
         public async Task<ActionResult> getReferenceNo()
         {
@@ -515,7 +526,7 @@ namespace Lending_System.Controllers
 
                 db.SaveChanges();
 
-                return Json("Success", JsonRequestBehavior.AllowGet);
+                return Json(tbl.reference_no, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -582,7 +593,7 @@ namespace Lending_System.Controllers
 
                 db.SaveChanges();
 
-                return Json("Success", JsonRequestBehavior.AllowGet);
+                return Json(tbl.reference_no, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -691,7 +702,7 @@ namespace Lending_System.Controllers
             {
                 if (Session["UserId"] != null)
                 {
-                    db_lendingEntities db = new db_lendingEntities();
+                    db = new db_lendingEntities();
                     List<receiptlist> list = new List<receiptlist>();
 
                     ViewBag.receiptno = id.ToString().PadLeft(5, '0'); ;
@@ -724,13 +735,7 @@ namespace Lending_System.Controllers
                     ViewBag.total_amount_paid = String.Format("{0:0.00}", total_amount_paid);
                     ViewBag.receiptdetailslist = list;
 
-                    //DateTime? date = null;
-                    //var result1 = from d in db.tbl_payment where d.reference_no.Equals(id) select d;
-                    //foreach (var dt1 in result1)
-                    //{
-                    //    date = dt1.date_trans;
-                    //}
-
+                    db = new db_lendingEntities();
                     List<receiptbalancelist> list2 = new List<receiptbalancelist>();
 
                     int customerid = Convert.ToInt32(GetBorrowerid(id));
@@ -776,7 +781,7 @@ namespace Lending_System.Controllers
 
             db_lendingEntities db = new db_lendingEntities();
             {
-                var borrowerid = "";
+                var borrowerid = "0";
                 var result = from d in db.tbl_payment where d.reference_no.Equals(id) select d.payor_id;
                 foreach (var data in result)
                 {

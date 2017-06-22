@@ -18,15 +18,19 @@ function AjaxSave() {
         type: "POST",
         data: JSON.stringify(myObj),
         contentType: 'application/json',
-        success: function (data) { },
-        error: function (data) { },
+        success: function (data) {
+
+        },
+        error: function(data) {
+            
+        },
         complete: function (data) {
             $.when(AjaxSaveDetailsInterest().done(AjaxSaveDetailsPrincipal().done(AjaxSaveLedger()))).then(
-              toastr.success('Successfully saved.', 'Save')
-            ).done(LoadReceipt());
+                toastr.success('Successfully saved.', 'Save')
+            ).done();
         }
     });
-
+    
     //AjaxSaveDetailsInterest();
     //AjaxSaveDetailsPrincipal();
     //AjaxSaveToLedger();
@@ -307,7 +311,14 @@ function AjaxSaveLedgerDetail(trans_type, reference_no, loan_id, loan_name, inte
         data: JSON.stringify(myObj),
         contentType: 'application/json',
         success: function (response) { deferred.resolve(); },
-        error: function (response) { deferred.reject(); }
+        error: function (response) { deferred.reject(); },
+        complete: function(data) {
+            setTimeout(function () {
+                    LoadReceipt(data.responseJSON);
+                },
+                300);
+        }
+
     });
 
     return deferred.promise();

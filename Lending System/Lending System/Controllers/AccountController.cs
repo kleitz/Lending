@@ -126,6 +126,7 @@ namespace Lending_System.Controllers
                     Session["UserId"] = tbl.autonum;
                     Session["UserName"] = tbl.username;
                     Session["UserFullName"] = tbl.firstname;
+                    Session["UserRank"] = tbl.user_rank_id;
 
                     if (tbl.user_rank_id == 3)
                     {

@@ -30,11 +30,11 @@ var List =
                                 return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
                             }
                         },
-                        { "data": "cash_begin", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                        { "data": "cash_release", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                        { "data": "cash_collected", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                        { "data": "cash_pulled_out", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
-                        { "data": "cash_end", "className": "dt-right", render: $.fn.dataTable.render.number(',', '.', 0, '') },
+                        { "data": "cash_begin", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                        { "data": "cash_release", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                        { "data": "cash_collected", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                        { "data": "cash_pulled_out", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
+                        { "data": "cash_end", "className": "text-right", render: $.fn.dataTable.render.number(',', '.', 2, '') },
                         {
                             "render": function (data, type, row) {
                                 return '<a href="' + RootUrl + '/EndDayTransaction/Print?id=' + row.autonum + '"><span title="Details">View</span></a>'

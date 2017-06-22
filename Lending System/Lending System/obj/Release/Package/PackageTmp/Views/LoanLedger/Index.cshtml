@@ -5,45 +5,49 @@
 }
 
 <div class="container">
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title" style="color:#ffffff"><strong>Loan Information</strong></h3>
-        </div>
-        <div class="panel-body">
-            <div class="table-responsive">
-                <div class="col-sm-5">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Loan List</strong></div>
+            <div class="panel-body">
+                <div class="table-responsive">
                     <table id="loans-table" class="table table-striped table-hover">
                         <thead>
-                            <tr>
-                                <th>autonum</th>
-                                <th>Date of Loan</th>
-                                <th>Reference No.</th>
-                                <th>Borrower</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="col-sm-7">
-                    <table id="ledger-table" class="table table-striped table-hover" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>autonum</th>
-                                <th>Date</th>
-                                <th>Ref No.</th>
-                                <th>Amount Paid</th>
-                                <th>Principal</th>
-                                <th>Interest</th>
-                                <th>Balance</th>
-                            </tr>
+                        <tr>
+                            <th>autonum</th>
+                            <th>Date of Loan</th>
+                            <th>Reference No.</th>
+                            <th>Borrower</th>
+                        </tr>
                         </thead>
                     </table>
                 </div>
             </div>
         </div>
-        <div class="panel-footer">
-
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><label id="borrowerName" value="Name">--</label></strong></div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table id="ledger-table" class="table table-striped table-hover" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th>autonum</th>
+                            <th>Date</th>
+                            <th>Ref No.</th>
+                            <th>Amount Paid</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+
+
 </div>
 
 @Scripts.Render("~/bundles/jquery")

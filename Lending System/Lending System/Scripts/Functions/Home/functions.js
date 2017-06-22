@@ -19,7 +19,7 @@ function GetCashCollected() {
         success: function (response) {
             
             $('#txtcash_collected').val(response);
-            GetCashPulledOut();
+            GetReceivablesForTheDay();
         },
         error: ""
     });
@@ -29,8 +29,19 @@ function GetCashPulledOut() {
         url: RootUrl + "/Home/GetCashPullOut",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (response) {         
-            $('#txtcash_pulled_out').val(response)
+        success: function (response) {
+            $('#txtcash_pulled_out').val(response);
+        },
+        error: ""
+    });
+}
+function GetReceivablesForTheDay() {
+    $.ajax({
+        url: RootUrl + "/Home/GetReceivablesForTheDay",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            $('#txtcash_pulled_out').val(response);
         },
         error: ""
     });
