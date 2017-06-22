@@ -285,3 +285,4 @@ D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.Web
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\bin\System.Web.WebPages.Razor.xml
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.dll
 D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.pdb
+D:\MLGS\Work\Repository\Lending\Lending System\Lending System\obj\Debug\Lending System.csprojResolveAssemblyReference.cache

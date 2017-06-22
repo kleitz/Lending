@@ -36,7 +36,7 @@ namespace Lending_System.Controllers
                 using (db_lendingEntities db = new db_lendingEntities())
                 {
 
-                    var data = db.tbl_payment.OrderByDescending(a => a.autonum).ToList();
+                    var data = db.tbl_payment.OrderBy(a => a.autonum).ToList();
 
                     return Json(new { data = data }, JsonRequestBehavior.AllowGet);
                 }

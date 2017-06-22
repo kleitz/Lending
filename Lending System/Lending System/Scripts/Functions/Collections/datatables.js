@@ -205,26 +205,21 @@ var LoanInterestDueViewing =
 
 function LoadReceipt(arg) {
     var url = RootUrl + "/Collections/Print?id=" + arg;
+    setTimeout(function() {
+            $('#receipt').load(url,
+                function () {
+                    $('#ModalPrint').modal('show');
+                });
+        },
+        300);
+}
+function LoadReceiptRePrint() {
+
+    var url = RootUrl + "/Collections/Print?id=" + $('#txtreference_no').val();
     var encodedParam = encodeURIComponent(url);
 
     $('#receipt').load(url,
-        function() {
+        function () {
             $('#ModalPrint').modal('show');
         });
-
-    //$.ajax({
-    //    url: RootUrl + "/Collections/LoadRePrint?id=" + $('#txtreference_no').val(),
-    //    type: "GET",
-    //    datatype: 'json',
-    //    success: function (response, status, xhr) {
-    //    debugger
-    //        var trHTML = '';
-    //        $.each(response, function (i, item) {
-    //            trHTML += '<tr><td>' + item.reference_no + '</td><td>' + item.payment_type + '</td><td>' + item.amount + '</td></tr>';
-    //        });
-    //        $('#receipt-details').append(trHTML);
-    //    },
-    //    error: function (response, status, xhr) {
-    //    }
-    //});
 }
