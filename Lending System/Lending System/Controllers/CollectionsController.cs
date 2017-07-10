@@ -180,7 +180,7 @@ namespace Lending_System.Controllers
                     from d in db.tbl_loan_processing
                     where d.customer_id == id
                           && d.status == "Released"
-                          && d.due_date < _serverDateTime
+                          && d.due_date <= _serverDateTime
                     orderby d.loantype_id ascending
                     select d;
                 foreach (var dt in result)

@@ -26,19 +26,32 @@ namespace Lending_System.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-        public ActionResult LoadList()
+        public JsonResult LoadList()
         {
             try
             {
                 using (db_lendingEntities db = new db_lendingEntities())
                 {
-                    var data = db.tbl_end_of_day_transactions.OrderByDescending(a => a.autonum).ToList();
+                    var endOfDayTransactionList = db.tbl_end_of_day_transactions.OrderByDescending(d => d.date_trans).ToList();
 
-                    return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+                    var result = from e in endOfDayTransactionList
+                        select new
+                        {
+                            e.autonum,
+                            e.date_trans,
+                            e.cash_begin,
+                            e.cash_release,
+                            e.cash_collected,
+                            e.cash_pulled_out,
+                            e.cash_end
+                        };
+
+                    return Json(new { data = result.OrderByDescending(d => d.date_trans) }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception)
             {
+                throw;
                 throw;
             }
         }

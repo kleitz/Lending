@@ -11,7 +11,13 @@
 var List =
     {
         InitializeEvents: function () {
-            $("#end-day-table").dataTable().fnDestroy()
+            function pad(num, size) {
+                var s = num + "";
+                while (s.length < size) s = "0" + s;
+                return s;
+            }
+
+            $("#end-day-table").dataTable().fnDestroy();
             var table = $('#end-day-table').DataTable({
                 "ajax": {
                     "url": RootUrl + "/EndDayTransaction/LoadList",
@@ -22,7 +28,16 @@ var List =
                 "columns": [
                         { "data": "autonum", "className": "hide" },
                         {
-                            "data": "date_trans", "className": "dt-left",
+                            "data": "date_trans", "className": "hide",
+                            "render": function (data, type, row) {
+                                var pattern = /Date\(([^)]+)\)/;
+                                var results = pattern.exec(row.date_trans);
+                                var dt = new Date(parseFloat(results[1]));
+                                return (dt.getFullYear().toString() + pad((dt.getMonth() + 1),2) + pad(dt.getDate(),2));
+                            }
+                        },
+                        {
+                            "data": "date_trans", "className": "text-left",
                             "render": function (data, type, row) {
                                 var pattern = /Date\(([^)]+)\)/;
                                 var results = pattern.exec(row.date_trans);
