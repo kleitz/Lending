@@ -17,10 +17,10 @@ $('#txtpayment_scheme').on('change', function () {
     ChangePaymentScheme(loandays);
 })
 //Installment No
-$('#txtinstallment_no').on('change ', function () {
+$('#txtinstallment_no').on('change', function () {
     ChangeDueDate();
     ComputeTotalReceivables(interesttype)
-})
+});
 function ChangeLoanType() {
     $('#txtloantype_id').val($('#txtloantype').find('option:selected').val())
     $('#txtloan_name').val($('#txtloantype').find('option:selected').text())

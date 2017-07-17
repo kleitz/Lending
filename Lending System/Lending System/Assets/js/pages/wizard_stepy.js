@@ -65,7 +65,7 @@ $(function() {
         block: true,
         next: function(index) {
             if (!$(".stepy-validation").validate(validate)) {
-                return false
+                return false;
             }
         }
     });

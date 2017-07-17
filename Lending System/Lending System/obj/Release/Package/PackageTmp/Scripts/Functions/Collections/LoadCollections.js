@@ -35,7 +35,7 @@ var List =
                             + ' <a href="' + RootUrl + '/Collections/Print?id=' + row.reference_no + '"><span class="fa fa-print" style="font-size: 18px" title="Print"></span></a>'
                             }
                         }
-                ],          
+                ]          
             });
         },
     }

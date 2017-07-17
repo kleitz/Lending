@@ -300,7 +300,7 @@ namespace Lending_System.Controllers
                         CustomerList.Add(new SelectListItem { Value = d.autonum.ToString(), Text = d.lastname + ", " + d.firstname + " " + d.middlename });
                     }
                 }
-                ViewBag.Customer = new SelectList(CustomerList, "Value", "Text");
+                ViewBag.Customer = new SelectList(CustomerList.OrderBy(a => a.Text), "Value", "Text");
             }
             catch (Exception)
             {

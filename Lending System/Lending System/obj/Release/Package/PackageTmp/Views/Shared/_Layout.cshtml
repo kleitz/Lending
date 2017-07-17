@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewBag.Title</title>
 
-
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
     <link href="~/Assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
@@ -14,30 +13,16 @@
     <link href="~/Assets/css/core.css" rel="stylesheet" type="text/css">
     <link href="~/Assets/css/components.css" rel="stylesheet" type="text/css">
     <link href="~/Assets/css/colors.css" rel="stylesheet" type="text/css">
-    <!-- /global stylesheets -->
-    
-    <style>
-        .bg-grey-800 {
-            background-color: #101010;
-            border-color: #101010;
-            color: #fff;
-        }
-    </style>
-    <script type="text/javascript">
-        var RootUrl = '@Url.Content("~/")';
-    </script>
-
+    <!-- /global stylesheets -->  
     <!-- Sweet Alert css -->
     <link href="~/Assets/plugins/bootstrap-sweetalert/sweet-alert.css" rel="stylesheet" type="text/css" />
-
+    <!-- /Sweet Alert css -->
     @Styles.Render("~/bundles/toastr-style")
-
     @RenderSection("styles", required: false)
-
-    <!--knockout js references-->
+    <!-- knockout js references -->
     @Scripts.Render("~/bundles/knockoutjs")
     @Scripts.Render("~/bundles/ko-global")
-
+    <!-- /knockout js references -->
     <!-- Core JS files -->
     <script type="text/javascript" src="~/Assets/js/plugins/loaders/pace.min.js"></script>
     <script type="text/javascript" src="~/Assets/js/core/libraries/jquery.min.js"></script>
@@ -45,33 +30,54 @@
     <script type="text/javascript" src="~/Assets/js/plugins/loaders/blockui.min.js"></script>
     <!-- /core JS files -->
     <!-- Theme JS files -->
+    <script type="text/javascript" src="~/Assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
     <script type="text/javascript" src="~/Assets/js/plugins/forms/styling/switch.min.js"></script>
     <script type="text/javascript" src="~/Assets/js/plugins/forms/styling/uniform.min.js"></script>
     <script type="text/javascript" src="~/Assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
     <script type="text/javascript" src="~/Assets/js/plugins/ui/moment/moment.min.js"></script>
     <script type="text/javascript" src="~/Assets/js/plugins/pickers/daterangepicker.js"></script>
-    <script type="text/javascript" src="~/Assets/js/core/app.js"></script>
+    <script type="text/javascript" src="~/Assets/js/core/app.js"></script> 
     
-    @*<script type="text/javascript" src="~/Assets/js/plugins/tables/datatables/datatables.min.js"></script>
-    <script type="text/javascript" src="~/Assets/js/pages/datatables_basic.js"></script>*@
+    @*@Scripts.Render("~/bundles/A-Custom/Tables")*@
     
+    <script type="text/javascript" src="~/Assets/js/plugins/tables/datatables/datatables.min.js"></script>
     <script type="text/javascript" src="~/Assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/pages/datatables_basic.js"></script>
+    <script type="text/javascript" src="~/Assets/js/pages/datatables_basic.js"></script>
     <!-- /theme JS files -->
-
+    <!---->
     <script src="~/Assets/kojs/knockout-bootstrap.js"></script>
     <script src="~/Assets/kojs/ajaxLoader.js"></script>
-
+    <!---->
     <!-- Sweet Alert js -->
     <script src="~/Assets/plugins/bootstrap-sweetalert/sweet-alert.min.js"></script>
-
+    <!-- /Sweet Alert js -->
+    <!-- Moment JS -->
+    <script src="~/Scripts/moment.js"></script>
+    <!-- /Moment JS -->
     <!-- Toastr js -->
     @Scripts.Render("~/bundles/toastr-script")
-
+    <!-- /Toastr js -->
+    <!-- RootURL -->
+    <script type="text/javascript">
+        var RootUrl = '@Url.Content("~")';
+        if (RootUrl === "/") {
+            //RootUrl = "";
+        }
+    </script>
+    <!-- /RootURL -->
     @RenderSection("scripts", required: false)
 
     <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+    <style>
+        .bg-grey-800 {
+            background-color: #101010;
+            border-color: #101010;
+            color: #fff;
+        }
+    </style>
 </head>
-
 
 <body>
     <!-- Main navbar -->

@@ -1,19 +1,8 @@
-﻿
-$(document).ready(function () {
-    if (RootUrl == "/") {
-        RootUrl = ""
-    }
-    List.InitializeEvents();
-    //$('input.number').number(true, 2);
-    //$('span.number').number(true, 4);
-
-    //GetCashReleased();
-
-    setInterval(function () {
-        table.ajax.reload();
-    }, 10000);
-    setInterval(GetCashReleased, 1000);
+﻿$(document).ready(function () {
+    GetCashReleased();
+    setInterval(GetCashReleased, 20000);
 });
+
 var table;
 var List =
     {

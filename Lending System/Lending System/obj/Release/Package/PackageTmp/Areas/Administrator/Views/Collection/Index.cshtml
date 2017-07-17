@@ -1,0 +1,282 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<style>
+    table th { /* new style */
+        border-top: double #000000;
+        border-bottom: 1px dashed #000000;
+    }
+
+    table td { /* new style */
+        width: 100px;
+    }
+</style>*@
+<div data-bind="visible: isPaymentListShowed" class="panel panel-flat">
+    <div class="panel-heading">
+        <h6 class="panel-title">Payment List</h6>
+        <div class="heading-elements">
+            <button data-bind="click: addPayment" type="submit" class="btn bg-orange-400 btn-labeled btn-labeled-right ml-10"><b><i class="icon-plus3"></i></b>Create new payment</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table text-nowrap" id="payment-table">
+            <thead>
+                <tr>
+                    <th>autonum</th>
+                    <th>Date</th>
+                    <th>Reference No.</th>
+                    <th>Name of Customer</th>
+                    <th>Total Payment</th>
+                    <th class="text-center"><i class="icon-arrow-down12"></i></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div data-bind="visible: isCreateModeShow" class="panel panel-white">
+    <div class="panel-heading">
+        <h6 class="panel-title">New Collection Wizard</h6>
+        <div class="heading-elements">
+            <button data-bind="click: backToPaymentList()" type="submit" class="btn btn-link"><i class="text-orange-600 icon-arrow-left13 position-left"></i> Back to payment list</button>
+        </div>
+    </div>
+    <form class="stepy-validation" action="#" id="stepyProject">
+        <fieldset>
+            <legend class="text-semibold">Select customer name</legend>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Select customer: <span class="text-danger">*</span></label>
+                        <select name="customerName" data-placeholder="Select position" class="select required" id="customerId">
+                            <option disabled selected> -- select an option -- </option>
+                            @foreach (var item in ViewBag.Customer)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-semibold">Select account</legend>
+            <div class="panel panel-flat">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table text-nowrap" id="account-table">
+                            <thead>
+                            <tr>
+                                <th>Loan No.</th>
+                                <th>Customer Name</th>
+                                <th>Balance</th>
+                                <th class="text-center"><i class="icon-arrow-down12"></i></th>
+                                <th>Balance</th>
+                                <th>Balance</th>                              
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-semibold">Account details</legend>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>OR #</label>
+                        <input type="text" data-bind="textinput: forSaveingModel.PaymentNo" class="form-control" id="PaymentNo" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Date</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="icon-calendar22"></i></span>
+                            <input type="text" data-bind="textinput: forSaveingModel.PaymentDate" class="form-control daterange-single" id="PaymentDate" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Customer Name</label>
+                        <input type="text" data-bind="textinput: forSaveingModel.CustomerName" class="form-control" id="CustomerName" readonly>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-flat border-top-primary border-xlg">
+                            <div class="panel-heading"><h6 class="panel-title">Principal</h6></div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap" id="principalTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Loan No.</th>
+                                            <th>Loan Type</th>
+                                            <th>Due Date</th>
+                                            <th>Amount Due</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: principalItems">
+                                        <tr>
+                                            <td data-bind="text: LoanNo" class="text-semibold"></td>
+                                            <td data-bind="text: LoanType" class="text-semibold"></td>
+                                            <td data-bind="text: DueDate" class="text-semibold"></td>
+                                            <td data-bind="text: AmountDue" class="text-semibold"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-flat border-top-primary border-xlg">
+                            <div class="panel-heading"><h6 class="panel-title">Interest</h6></div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap" id="interestTable">
+                                        <thead>
+                                        <tr>
+                                            <th>Loan No.</th>
+                                            <th>Loan Type</th>
+                                            <th>Due Date</th>
+                                            <th>Amount Due</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: interestItems">
+                                        <tr>
+                                            <td data-bind="text: LoanNo" class="text-semibold"></td>
+                                            <td data-bind="text: LoanType" class="text-semibold"></td>
+                                            <td data-bind="text: DueDate" class="text-semibold"></td>
+                                            <td data-bind="text: AmountDue" class="text-semibold"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>               
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-semibold">Payment</legend>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <label>Amount Due</label>
+                        <input type="text" class="form-control text-semibold input-lg" style="text-align: right" id="AmountDue" readonly>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <label>Payment</label>
+                        <input type="text" data-bind="textinput: forSaveingModel.Payment" class="form-control text-semibold input-lg required" style="text-align: right" id="Payment">
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <label>Change</label>
+                        <input type="text" class="form-control text-semibold input-lg" style="text-align: right" id="Change" readonly>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="text-semibold">Receipt</legend>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="panel panel-flat">
+                            <div class="panel-heading"><h6 class="panel-title"></h6>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table" style="font-family: Consolas; font-size: 15px;">
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: center; width: 300px">RGL LENDING</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: center; width: 300px">Maa, Davao City</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: center; width: 300px"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: center; width: 300px"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: left; width: 300px">Receipt No: @ViewBag.receiptno</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: left; width: 300px">Date: @ViewBag.receiptdate</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: center; width: 300px"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: left; width: 400px">Borrower: @ViewBag.borrower</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-4" style="text-align: left; width: 300px">ID No: </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>      
+        </fieldset>
+        <button data-bind="click: savePayment" type="submit" class="btn btn-success stepy-finish">Save <i class="icon-check position-right"></i></button>
+    </form>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/Assets/js/plugins/forms/wizards/stepy.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/core/libraries/jasny_bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/forms/validation/validate.min.js"></script>
+    <script type="text/javascript" src="~/Assets/js/plugins/notifications/bootbox.min.js"></script>
+    
+    <script src="~/Areas/Administrator/Assets/js/stepy-wizard.js"></script>
+
+    <script src="~/Areas/Administrator/Assets/model/collections.model.js"></script>
+    <script src="~/Areas/Administrator/Assets/viewmodel/collections.viewmodel.js"></script>
+
+}

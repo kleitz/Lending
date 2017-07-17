@@ -1,0 +1,47 @@
+﻿@model Lending_System.Models.tbl_user_validation_login
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <img alt="Brand" src="~/Images/Logo/logo.png" height="200" width="200" style="margin-top: -9px;">
+            </div>
+        </div>
+        <div class="main-login main-center container-login">
+            <form class="form-horizontal" id="myForm">
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(m => m.username, new { @autofocus = "", @class = "form-control", @placeholder = "Username" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            @Html.PasswordFor(m => m.password, new { @id = "input", @keydown = "", @class = "form-control", @placeholder = "Password" })
+                        </div>
+                        @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <button type="submit" id="btn-login" class="btn btn-lg btn-danger">Login</button>
+                </div>
+                <div class="login-register">
+                    @Html.ActionLink("Register", "Registration", "Account", new { @id = "input_enter" })
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

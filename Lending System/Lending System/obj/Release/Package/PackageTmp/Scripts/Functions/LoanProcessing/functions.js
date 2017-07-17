@@ -155,8 +155,7 @@ var AmortizationTable =
         }
 //Initialize Charges Table
 function LoadCharges(chargeid) {
-    debugger
-    if (chargetype == "1") {
+    if (chargetype === "1") {
         var table = $('#charges-table').DataTable({
             "bPaginate": false,
             "bLengthChange": false,

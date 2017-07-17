@@ -96,16 +96,22 @@ namespace Lending_System.Controllers
 
             if (Session["UserId"] != null)
             {
-                return RedirectToAction("Index", "Home");               
+                if (Session["UserRank"].ToString() == "3")
+                {
+                    return RedirectToAction("Index", "Dashboard", new { area = "User" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }                       
             }
             else
             {
                 return View();
             }
-
         }
         [HttpPost]
-        public JsonResult Login(tbl_user_validation_login model)
+        public ActionResult Login(tbl_user_validation_login model)
         {
             string result = "No user";
             try
@@ -137,7 +143,14 @@ namespace Lending_System.Controllers
                         result = "Admin";
                     }
                 }
-                return Json(result, JsonRequestBehavior.AllowGet);
+                if (Session["UserRank"].ToString() == "3")
+                {
+                    return RedirectToAction("Index", "Dashboard", new { area = "User" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@ namespace Lending_System.Models
     {
         public string loan_no { get; set; }
         public string loan_type { get; set; }
+        public string customerName { get; set; }
         public Nullable<System.DateTime> due_date { get; set; }
         public Nullable<decimal> amount_due { get; set; }
         public Nullable<decimal> payment { get; set; }

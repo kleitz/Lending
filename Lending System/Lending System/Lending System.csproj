@@ -171,6 +171,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrator\Controllers\CollectionController.cs" />
+    <Compile Include="Areas\Administrator\Models\collectionSaveModel.cs" />
+    <Compile Include="Areas\Administrator\Models\loanAccountModel.cs" />
+    <Compile Include="Areas\Administrator\Models\loanListModel.cs" />
+    <Compile Include="Areas\User\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CashPullOutController.cs" />
     <Compile Include="Controllers\CollectionsController.cs" />
@@ -266,6 +273,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Administrator\Assets\js\stepy-wizard.js" />
+    <Content Include="Areas\Administrator\Assets\model\collections.model.js" />
+    <Content Include="Areas\Administrator\Assets\viewmodel\collections.viewmodel.js" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
     <Content Include="Assets\css\colors.css" />
@@ -2474,6 +2484,8 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Content\UI\assets\iframe-content.js" />
     <Content Include="Content\UI\assets\iframe.js" />
     <Content Include="Content\UI\assets\jquery.min.js" />
@@ -3030,6 +3042,12 @@
     <Content Include="Assets\locales\en.json" />
     <Content Include="Assets\locales\ru.json" />
     <Content Include="Assets\locales\ua.json" />
+    <Content Include="Areas\Administrator\Views\web.config" />
+    <Content Include="Areas\Administrator\Views\Collection\Index.cshtml" />
+    <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\User\Views\Dashboard\Index.cshtml" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Properties\PublishProfiles\Lending System.pubxml" />
     <Content Include="Images\Logo\logo.png" />
     <Content Include="Models\dbModel.Context.tt">
@@ -3200,6 +3218,8 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -3214,7 +3234,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\testview.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Registration.cshtml" />
     <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
@@ -3251,9 +3270,14 @@
     <Content Include="Views\Shared\_MainNavbarPartial.cshtml" />
     <Content Include="Views\Shared\_PageHeaderPartial.cshtml" />
     <Content Include="Views\Shared\_SidebarPartial.cshtml" />
+    <Content Include="Views\Account\HOLDER.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administrator\Views\Shared\" />
+    <Folder Include="Areas\User\Models\" />
+    <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,7 @@ namespace Lending_System.Controllers
             {
                 ViewBag.Form = "Dashboard";
                 ViewBag.Controller = "Home";
-                ViewBag.Action = "Index";
+                ViewBag.Action = "Dashboard";
 
                 return View();
             }

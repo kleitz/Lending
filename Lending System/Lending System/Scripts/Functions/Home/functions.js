@@ -1,6 +1,6 @@
 ﻿function GetCashReleased() {
     $.ajax({
-        url: RootUrl + "/Home/GetCashRelease",
+        url: RootUrl + "Home/GetCashRelease",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -13,7 +13,7 @@
 }
 function GetCashCollected() {
     $.ajax({
-        url: RootUrl + "/Home/GetCashCollect",
+        url: RootUrl + "Home/GetCashCollect",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -26,7 +26,7 @@ function GetCashCollected() {
 }
 function GetCashPulledOut() {
     $.ajax({
-        url: RootUrl + "/Home/GetCashPullOut",
+        url: RootUrl + "Home/GetCashPullOut",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -37,7 +37,7 @@ function GetCashPulledOut() {
 }
 function GetReceivablesForTheDay() {
     $.ajax({
-        url: RootUrl + "/Home/GetReceivablesForTheDay",
+        url: RootUrl + "Home/GetReceivablesForTheDay",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
