@@ -34,6 +34,9 @@
     }
 
     function savePayment() {
+        //setTimeout(function () {
+        //    printReceipt('receipt');
+        //}, 300);
 
         loaderApp.showPleaseWait();
         var param = ko.toJS(forSaveingModel);
@@ -45,26 +48,22 @@
             contentType: 'application/json; charset=utf-8',
             success: function (result) {
                 if (result.success) {
-                    swal("Success", result.message, "success");
+                    //swal("Success", result.message, "success",
+                  
+                    //        function (isConfirm) {
+                    //            if (isConfirm) {
+                    //                reloadPage();
+                    //            }
+                    //        }                    
+                    //    );    
 
-                    //loadList();
+                    swal({ title: "Success!", text: result.message, type: "success" }, function () { printReceipt('receipt'); });
 
-                    //isPaymentListShowed(true);
-                    //isCreateModeShow(false);
-             
-                    setTimeout(function () {
-                        loaderApp.hidePleaseWait();
-                    }, 1000);
-                 
-                    setTimeout(function() {
-                           reloadPage();
-                    }, 300);
+                    loaderApp.hidePleaseWait();
                 } else {
                     loaderApp.hidePleaseWait();
 
                     swal("Error", result.message, "error");
-
-                    //clearControls();
                 }
             }
         });
@@ -106,16 +105,14 @@
                 },
                 {
                     "render": function(data, type, row) {
-                        return '<a href="' +
-                            RootUrl +
-                            'Collections/Details?id=' +
-                            row.autonum +
-                            '"><span title="Details">View</span></a>' +
-                            ' <a href="' +
-                            RootUrl +
-                            '/Collections/Print?id=' +
-                            row.reference_no +
-                            '"><span class="fa fa-print" style="font-size: 18px" title="Print"></span></a>'
+                        return '<ul class="icons-list">' +
+                            '<li class="dropdown">' +
+                            '<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>' +
+                            '<ul class="dropdown-menu dropdown-menu-right">' +
+                            '<li><a href="#"><i class="icon-file-stats"></i> View receipt</a></li>' +
+                            '</ul>' +
+                            '</li>' +
+                            '</ul>';
                     }
                 }
             ]
@@ -136,6 +133,67 @@
 
     function hideSidebar() {
         $('#hide-sidebar').trigger('click');
+    };
+
+    function generatePrintValues() {
+        //$('#ReceiptNo').html('Whatever <b>HTML</b> you want here.');
+
+        $('#ReceiptNo').html('Receipt No: ' + $('#PaymentNo').val());
+        $('#Date').html('Date: ' + $('#PaymentDate').val());
+        $('#Borrower').html('Borrower: ' + $('#CustomerName').val());
+        $('#IdNo').html('ID No: ' + $('#customerId').val());
+
+        var paymentTotal = $('#Payment').val();
+        paymentTotal = parseFloat(paymentTotal.toString().replace(/[^0-9\.]+/g, ""));
+
+        var amountDueInterest = forSaveingModel.AmountDueInterest;
+        amountDueInterest = parseFloat(amountDueInterest.toString().replace(/[^0-9\.]+/g, ""));
+
+        var amountDuePrincipal = forSaveingModel.AmountDuePrincipal;
+        amountDuePrincipal = parseFloat(amountDuePrincipal.toString().replace(/[^0-9\.]+/g, ""));
+
+        if (amountDueInterest > 0) {
+            if (paymentTotal >= amountDueInterest) {
+                $('#interestReference').html(forSaveingModel.LoanNo);
+                $('#interestParticulars').html('Interest payment');
+                $('#interestAmount').html(amountDueInterest.toFixed(2));
+                paymentTotal = paymentTotal - amountDueInterest;
+            } else {
+                $('#interestReference').html(forSaveingModel.LoanNo);
+                $('#interestParticulars').html('Interest payment');
+                $('#interestAmount').html(paymentTotal.toFixed(2));
+                paymentTotal = 0;
+            }
+        }
+        if (paymentTotal > 0) {
+            if (amountDuePrincipal > 0) {
+                $('#principalReference').html(forSaveingModel.LoanNo);
+                $('#principalParticulars').html('Principal payment');
+                $('#principalAmount').html(paymentTotal.toFixed(2));
+            }
+        }
+
+        $('#balancLoanNo').html(forSaveingModel.LoanNo);
+        $('#balanceAmount').html($('#Change').val());
+    };
+
+    function printReceipt(divId) {
+        setTimeout(function () {
+            showPrintDialog(divId);
+        }, 500);
+
+    }
+    function showPrintDialog(divId) {
+        var content = document.getElementById(divId);
+        var mapSrc = window.open("", "PRINT MAP", "width=200,top=0,left=0,toolbar=no,scrollbars=no,status=no,resizable=no");
+        mapSrc.document.write('<html><head>');
+        mapSrc.document.write(content.innerHTML);
+        mapSrc.document.write('</div></body></html>');
+        mapSrc.document.close();
+        mapSrc.focus();
+        mapSrc.print();
+        setTimeout(function () { mapSrc.close(); }, 300);
+        setTimeout(function () { reloadPage(); }, 300);
     }
     // #endregion
 
@@ -308,7 +366,9 @@
         getPaymentNo: getPaymentNo,
         loadAmountDue: loadAmountDue,
         forSaveingModel: forSaveingModel,
-        clearControls: clearControls
+        clearControls: clearControls,
+        generatePrintValues: generatePrintValues,
+        printReceipt: printReceipt
     };
     return vm;
 

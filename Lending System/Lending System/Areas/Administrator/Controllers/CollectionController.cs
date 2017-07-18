@@ -85,7 +85,7 @@ namespace Lending_System.Areas.Administrator.Controllers
 
                         totalBalance = decimal.Round((decimal)totalBalance, 2, MidpointRounding.AwayFromZero);
 
-                        if (interest_type == "1")
+                        if (interest_type == "2")
                         {
                             totalBalance = totalBalance - interest;
                         }
@@ -667,6 +667,12 @@ namespace Lending_System.Areas.Administrator.Controllers
                 }
                 return dateStart;
             }
+        }
+
+        public void PopulateViewBagForReceipt()
+        {
+            ViewBag.receiptno = "TEST";
+            ViewBag.receiptdate = "TEST";
         }
         #endregion
     }
