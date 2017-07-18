@@ -1,45 +1,49 @@
 ﻿//Computation of total receivables
 function ComputeTotalReceivables(status) {
-    totalinterest = parseInt($('#txtloan_granted').val() * ($('#txtloan_interest_rate').val() / 100))
+    var loanGranted = parseFloat($('#txtloan_granted').val().replace(/[^0-9\.]+/g, ""));
+    var loanInterestRate = parseFloat($('#txtloan_interest_rate').val().replace(/[^0-9\.]+/g, ""));
+
+    totalinterest = (loanGranted * (loanInterestRate / 100));
 
     if (parseInt($('#txtinstallment_no').val()) != "") {
-        totalinterest = totalinterest * parseInt($('#txtinstallment_no').val())
+        totalinterest = totalinterest * parseFloat($('#txtinstallment_no').val().replace(/[^0-9\.]+/g, ""));
     }
-    $('#txttotal_receivable').val(0)
-    $('#txtnet_proceeds').val(0)
+
+    $('#txttotal_receivable').val(0);
+    $('#txtnet_proceeds').val(0);
     if (status == 1) {
-        $('#txttotal_receivable').val(parseInt($('#txtloan_granted').val()) + totalinterest)
-        $('#txtnet_proceeds').val(parseInt($('#txtloan_granted').val()))
+        $('#txttotal_receivable').val(parseInt($('#txtloan_granted').val()) + totalinterest);
+        $('#txtnet_proceeds').val(parseInt($('#txtloan_granted').val()));
     }
     else {
         $('#txttotal_receivable').val($('#txtloan_granted').val())
-        $('#txtnet_proceeds').val(parseInt($('#txtloan_granted').val()) - totalinterest)
+        $('#txtnet_proceeds').val(parseInt($('#txtloan_granted').val()) - totalinterest);
     }
 }
 //Create Amortization Schedule
 function CreateSchedule() {
     if (interesttype == 1) {
-        if ($('#txtloan_granted').val() != 0) {
+        if ($('#txtloan_granted').val() !== 0) {
             CreateAmortizationSchedule(
-                                        $('#txtdue_date').val(),
-                                        $('#txtloan_granted').val(),
-                                        totalinterest,
-                                        $('#txttotal_receivable').val(),
-                                        $('#txttotal_receivable').val(),
-                                        $('#txtinstallment_no').val(),
-                                        $('#txtpayment_scheme').find('option:selected').text())
+                $('#txtdue_date').val(),
+                $('#txtloan_granted').val(),
+                totalinterest,
+                $('#txttotal_receivable').val(),
+                $('#txttotal_receivable').val(),
+                $('#txtinstallment_no').val(),
+                $('#txtpayment_scheme').find('option:selected').text());
         }
     }
     else {
-        if ($('#txtloan_granted').val() != 0) {
+        if ($('#txtloan_granted').val() !== 0) {
             CreateAmortizationSchedule(
-                                        $('#txtdue_date').val(),
-                                        $('#txtloan_granted').val(),
-                                        0,
-                                        $('#txttotal_receivable').val(),
-                                        $('#txttotal_receivable').val(),
-                                        $('#txtinstallment_no').val(),
-                                        $('#txtpayment_scheme').find('option:selected').text())
+                $('#txtdue_date').val(),
+                $('#txtloan_granted').val(),
+                0,
+                $('#txttotal_receivable').val(),
+                $('#txttotal_receivable').val(),
+                $('#txtinstallment_no').val(),
+                $('#txtpayment_scheme').find('option:selected').text());
         }
     }
 }

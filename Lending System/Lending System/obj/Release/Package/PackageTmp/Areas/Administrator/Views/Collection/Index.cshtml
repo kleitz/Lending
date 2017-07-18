@@ -49,8 +49,8 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Select customer: <span class="text-danger">*</span></label>
-                        <select name="customerName" data-placeholder="Select position" class="select required" id="customerId">
-                            <option disabled selected> -- select an option -- </option>
+                        <select name="customerName" data-placeholder="Select customer" class="select required" id="customerId">
+                            <option disabled selected></option>
                             @foreach (var item in ViewBag.Customer)
                             {
                                 <option value="@item.Value">@item.Text</option>
@@ -206,7 +206,7 @@
 
                     </div>
                     <div class="col-md-4">
-                        <label>Change</label>
+                        <label>Balance</label>
                         <input type="text" class="form-control text-semibold input-lg" style="text-align: right" id="Change" readonly>
                     </div>
                     <div class="col-md-4">
@@ -224,38 +224,99 @@
                         <div class="panel panel-flat">
                             <div class="panel-heading"><h6 class="panel-title"></h6>
                             </div>
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table" style="font-family: Consolas; font-size: 15px;">
+                            <div class="panel-body" id="receipt">
+                                <!--- Headers -->
+                                <div class="table-responsive" style="width: 100%;">
+                                    <table style="font-family: Consolas; width: 100%;">
                                         <tr>
-                                            <td class="col-md-4" style="text-align: center; width: 300px">RGL LENDING</td>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px;"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 18px;"><strong>RGL LENDING</strong></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px;"></td>
                                         </tr>
                                         <tr>
-                                            <td class="col-md-4" style="text-align: center; width: 300px">Maa, Davao City</td>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px;"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;">Maa, Davao City</td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px;"></td>
+                                        </tr>                  
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px;"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px;">&nbsp</td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px;"></td>
                                         </tr>
                                         <tr>
-                                            <td class="col-md-4" style="text-align: center; width: 300px"></td>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;" id="ReceiptNo"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
                                         </tr>
                                         <tr>
-                                            <td class="col-md-4" style="text-align: center; width: 300px"></td>
-                                        </tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;" id="Date"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
+                                        </tr>  
                                         <tr>
-                                            <td class="col-md-4" style="text-align: left; width: 300px">Receipt No: @ViewBag.receiptno</td>
-                                        </tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;" id="Borrower"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
+                                        </tr>  
                                         <tr>
-                                            <td class="col-md-4" style="text-align: left; width: 300px">Date: @ViewBag.receiptdate</td>
-                                        </tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;" id="IdNo"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
+                                        </tr>  
                                         <tr>
-                                            <td class="col-md-4" style="text-align: center; width: 300px"></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left; width: 400px">Borrower: @ViewBag.borrower</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-4" style="text-align: left; width: 300px">ID No: </td>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;">&nbsp</td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
                                         </tr>
                                     </table>
                                 </div>
+                                <!--- /Headers -->
+                                <!--- Body -->
+                                <div class="table-responsive" style="width: 100%;">
+                                    <table style="font-family: Consolas; width: 100%;">
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;"><strong>REFERENCE</strong></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"><strong>PARTICULARS</strong></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"><strong>AMOUNT</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;" id="principalReference"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;" id="principalParticulars"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;" id="principalAmount"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;" id="interestReference"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;" id="interestParticulars"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;" id="interestAmount"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;">&nbsp</td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;"><strong>Balance:</strong></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;" id="balancLoanNo"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;" id="balanceAmount"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;">&nbsp</td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-4" style="text-align: left; width: 166.7px; font-size: 14px;">Cashier: @Session["UserFullName"]</td>
+                                            <td class="col-lg-4" style="text-align: center; width: 166.7px; font-size: 14px;"></td>
+                                            <td class="col-lg-4" style="text-align: right; width: 166.7px; font-size: 14px;"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--- /Body -->
                             </div>
                         </div>
                     </div>

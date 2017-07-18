@@ -84,17 +84,16 @@ $(function () {
                 app.vm.loadAmountDue();
             }
             if (index === 5) {
-
+                app.vm.generatePrintValues();
             }
         },
         finish: function () {
-            debugger;
             // your code for submit and reset forms
-            $(':input', '#stepyProject')
-                .not(':button, :submit, :reset, :hidden')
-                .val('')
-                .removeAttr('checked')
-                .removeAttr('selected');
+            //$(':input', '#stepyProject')
+            //    .not(':button, :submit, :reset, :hidden')
+            //    .val('')
+            //    .removeAttr('checked')
+            //    .removeAttr('selected');
         }
     });
 
